@@ -1,0 +1,13 @@
+#!/bin/sh
+echo "removing boost build dirs..."
+cd src
+rm -rf boost_deps/bin*
+rm -rf boost_deps/boost_build
+rm -rf boost_deps/stage
+rm boost_deps/bjam
+rm boost_deps/project-config.jam*
+rm boost_deps/bootstrap.log
+cd ..
+
+echo "removing boost libs from inst dir..."
+rm -rf inst/libs

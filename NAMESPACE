@@ -1,0 +1,7 @@
+exportPattern("^[[:alpha:]]+")
+useDynLib(libboost_system)
+useDynLib(libboost_thread)
+useDynLib(libboost_filesystem)
+useDynLib(libboost_program_options)
+useDynLib(libboost_date_time)
+useDynLib(autodockr)
