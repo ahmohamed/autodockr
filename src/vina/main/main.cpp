@@ -342,35 +342,6 @@ struct usage_error : public std::runtime_error {
 	usage_error(const std::string& message) : std::runtime_error(message) {}
 };
 
-struct options_occurrence {
-	bool some;
-	bool all;
-	options_occurrence() : some(false), all(true) {} // convenience
-	options_occurrence& operator+=(const options_occurrence& x) {
-		some = some || x.some;
-		all  = all  && x.all;
-		return *this;
-	}
-};
-
-options_occurrence get_occurrence(boost::program_options::variables_map& vm, boost::program_options::options_description& d) {
-	options_occurrence tmp;
-	VINA_FOR_IN(i, d.options())
-		if(vm.count((*d.options()[i]).long_name()))
-			tmp.some = true;
-		else
-			tmp.all = false;
-	return tmp;
-}
-
-void check_occurrence(boost::program_options::variables_map& vm, boost::program_options::options_description& d) {
-	VINA_FOR_IN(i, d.options()) {
-		const std::string& str = (*d.options()[i]).long_name();
-		if(!vm.count(str))
-			std::cerr << "Required parameter --" << str << " is missing!\n";
-	}
-}
-
 model parse_bundle(const std::string& rigid_name, const boost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
 	model tmp = (flex_name_opt) ? parse_receptor_pdbqt(make_path(rigid_name), make_path(flex_name_opt.get()))
 		                        : parse_receptor_pdbqt(make_path(rigid_name));
