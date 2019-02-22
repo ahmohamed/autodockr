@@ -342,35 +342,6 @@ struct usage_error : public std::runtime_error {
 	usage_error(const std::string& message) : std::runtime_error(message) {}
 };
 
-struct options_occurrence {
-	bool some;
-	bool all;
-	options_occurrence() : some(false), all(true) {} // convenience
-	options_occurrence& operator+=(const options_occurrence& x) {
-		some = some || x.some;
-		all  = all  && x.all;
-		return *this;
-	}
-};
-
-options_occurrence get_occurrence(boost::program_options::variables_map& vm, boost::program_options::options_description& d) {
-	options_occurrence tmp;
-	VINA_FOR_IN(i, d.options())
-		if(vm.count((*d.options()[i]).long_name()))
-			tmp.some = true;
-		else
-			tmp.all = false;
-	return tmp;
-}
-
-void check_occurrence(boost::program_options::variables_map& vm, boost::program_options::options_description& d) {
-	VINA_FOR_IN(i, d.options()) {
-		const std::string& str = (*d.options()[i]).long_name();
-		if(!vm.count(str))
-			std::cerr << "Required parameter --" << str << " is missing!\n";
-	}
-}
-
 model parse_bundle(const std::string& rigid_name, const boost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
 	model tmp = (flex_name_opt) ? parse_receptor_pdbqt(make_path(rigid_name), make_path(flex_name_opt.get()))
 		                        : parse_receptor_pdbqt(make_path(rigid_name));
@@ -394,7 +365,10 @@ model parse_bundle(const boost::optional<std::string>& rigid_name_opt, const boo
 		return parse_bundle(ligand_names);
 }
 
-int main_with_args(std::string rigid_name, std::string ligand_name, boost::optional<std::string> flex_name, std::string out_name){
+int main_with_args(const boost::optional<std::string>& rigid_name_opt,
+	const boost::optional<std::string>& flex_name_opt,
+	std::string ligand_name,
+	const boost::optional<std::string>& out_name_opt) {
 	fl center_x=109.00,
 		center_y=40.12,
 		center_z=46.50,
@@ -459,10 +433,21 @@ int main_with_args(std::string rigid_name, std::string ligand_name, boost::optio
 
 	doing(verbosity, "Reading input", log);
 
-	model m       = parse_bundle(rigid_name, flex_name, std::vector<std::string>(1, ligand_name));
+	model m       = parse_bundle(rigid_name_opt, flex_name_opt, std::vector<std::string>(1, ligand_name));
 	sz max_modes_sz = static_cast<sz>(num_modes);
 	boost::optional<model> ref;
 	done(verbosity, log);
+
+	std::string out_name;
+	if(output_produced) { // FIXME
+		log << "accessing out_name_opt \n";
+		if(!out_name_opt) {
+			out_name = default_output(ligand_name);
+			log << "Output will be " << out_name << '\n';
+		} else {
+			out_name = out_name_opt.get();
+		}
+	}
 
 	main_procedure(m, ref,
 				out_name,
@@ -471,10 +456,13 @@ int main_with_args(std::string rigid_name, std::string ligand_name, boost::optio
 				weights,
 				cpu, seed, verbosity, max_modes_sz, energy_range, log);
 }
-int main_with_args(std::string rigid_name, std::string ligand_name, std::string out_name){
-	boost::optional<std::string> flex_name;
+int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
+	const boost::optional<std::string>& flex_name_opt,
+	std::string ligand_name,
+	const boost::optional<std::string>& out_name_opt)
+{
 	try{
-		main_with_args(rigid_name, ligand_name, flex_name, out_name);
+		main_with_args(rigid_name_opt, flex_name_opt, ligand_name, out_name_opt);
 	}
 	catch(file_error& e) {
 		throw vina_error("\n\nError: could not open \"" + e.name.native_file_string() + "\" for " + (e.in ? "reading" : "writing") + ".\n");
@@ -485,77 +473,74 @@ int main_with_args(std::string rigid_name, std::string ligand_name, std::string 
 	}
 	catch(usage_error& e) {
 		throw vina_error(std::string("\n\nUsage error: ") + e.what() + ".\n");
-		return 1;
 	}
 	catch(parse_error& e) {
-		std::cerr << "\n\nParse error on line " << e.line << " in file \"" << e.file.native_file_string() << "\": " << e.reason << '\n';
-		return 1;
+		throw vina_error(std::string("\n\nParse error on line ") + to_string(e.line) + " in file \"" + e.file.native_file_string() + "\": " + e.reason + '\n');
 	}
 	catch(std::bad_alloc&) {
-		std::cerr << "\n\nError: insufficient memory!\n";
-		return 1;
+		throw vina_error(std::string("\n\nError: insufficient memory!\n"));
 	}
 }
-int main_backup(int argc, char const *argv[]) {
-		const std::string version_string = "AutoDock Vina 1.1.2 (May 11, 2011)";
-		const std::string error_message = "\n\n\
-	Please contact the author, Dr. Oleg Trott <ot14@columbia.edu>, so\n\
-	that this problem can be resolved. The reproducibility of the\n\
-	error may be vital, so please remember to include the following in\n\
-	your problem report:\n\
-	* the EXACT error message,\n\
-	* your version of the program,\n\
-	* the type of computer system you are running it on,\n\
-	* all command line options,\n\
-	* configuration file (if used),\n\
-	* ligand file as PDBQT,\n\
-	* receptor file as PDBQT,\n\
-	* flexible side chains file as PDBQT (if used),\n\
-	* output file as PDBQT (if any),\n\
-	* input (if possible),\n\
-	* random seed the program used (this is printed when the program starts).\n\
-	\n\
-	Thank you!\n";
-	try{
-		boost::optional<std::string> flex_name;
-		main_with_args("../Target/human.pdbqt", "../Ligand/human_ligand.pdbqt", flex_name, "../Out/human.pdbqt_plasmo_ligand.vinaall.pdbqt");
-	}
-	catch(file_error& e) {
-		std::cerr << "\n\nError: could not open \"" << e.name.native_file_string() << "\" for " << (e.in ? "reading" : "writing") << ".\n";
-		return 1;
-	}
-	catch(boost::filesystem::filesystem_error& e) {
-		std::cerr << "\n\nFile system error: " << e.what() << '\n';
-		return 1;
-	}
-	catch(usage_error& e) {
-		std::cerr << "\n\nUsage error: " << e.what() << ".\n";
-		return 1;
-	}
-	catch(parse_error& e) {
-		std::cerr << "\n\nParse error on line " << e.line << " in file \"" << e.file.native_file_string() << "\": " << e.reason << '\n';
-		return 1;
-	}
-	catch(std::bad_alloc&) {
-		std::cerr << "\n\nError: insufficient memory!\n";
-		return 1;
-	}
-
-	// Errors that shouldn't happen:
-
-	catch(std::exception& e) {
-		std::cerr << "\n\nAn error occurred: " << e.what() << ". " << error_message;
-		return 1;
-	}
-	catch(internal_error& e) {
-		std::cerr << "\n\nAn internal error occurred in " << e.file << "(" << e.line << "). " << error_message;
-		return 1;
-	}
-	catch(...) {
-		std::cerr << "\n\nAn unknown error occurred. " << error_message;
-		return 1;
-	}
-}
+// int main_backup(int argc, char const *argv[]) {
+// 		const std::string version_string = "AutoDock Vina 1.1.2 (May 11, 2011)";
+// 		const std::string error_message = "\n\n\
+// 	Please contact the author, Dr. Oleg Trott <ot14@columbia.edu>, so\n\
+// 	that this problem can be resolved. The reproducibility of the\n\
+// 	error may be vital, so please remember to include the following in\n\
+// 	your problem report:\n\
+// 	* the EXACT error message,\n\
+// 	* your version of the program,\n\
+// 	* the type of computer system you are running it on,\n\
+// 	* all command line options,\n\
+// 	* configuration file (if used),\n\
+// 	* ligand file as PDBQT,\n\
+// 	* receptor file as PDBQT,\n\
+// 	* flexible side chains file as PDBQT (if used),\n\
+// 	* output file as PDBQT (if any),\n\
+// 	* input (if possible),\n\
+// 	* random seed the program used (this is printed when the program starts).\n\
+// 	\n\
+// 	Thank you!\n";
+// 	try{
+// 		boost::optional<std::string> flex_name;
+// 		main_with_args("../Target/human.pdbqt", "../Ligand/human_ligand.pdbqt", flex_name, "../Out/human.pdbqt_plasmo_ligand.vinaall.pdbqt");
+// 	}
+// 	catch(file_error& e) {
+// 		std::cerr << "\n\nError: could not open \"" << e.name.native_file_string() << "\" for " << (e.in ? "reading" : "writing") << ".\n";
+// 		return 1;
+// 	}
+// 	catch(boost::filesystem::filesystem_error& e) {
+// 		std::cerr << "\n\nFile system error: " << e.what() << '\n';
+// 		return 1;
+// 	}
+// 	catch(usage_error& e) {
+// 		std::cerr << "\n\nUsage error: " << e.what() << ".\n";
+// 		return 1;
+// 	}
+// 	catch(parse_error& e) {
+// 		std::cerr << "\n\nParse error on line " << e.line << " in file \"" << e.file.native_file_string() << "\": " << e.reason << '\n';
+// 		return 1;
+// 	}
+// 	catch(std::bad_alloc&) {
+// 		std::cerr << "\n\nError: insufficient memory!\n";
+// 		return 1;
+// 	}
+//
+// 	// Errors that shouldn't happen:
+//
+// 	catch(std::exception& e) {
+// 		std::cerr << "\n\nAn error occurred: " << e.what() << ". " << error_message;
+// 		return 1;
+// 	}
+// 	catch(internal_error& e) {
+// 		std::cerr << "\n\nAn internal error occurred in " << e.file << "(" << e.line << "). " << error_message;
+// 		return 1;
+// 	}
+// 	catch(...) {
+// 		std::cerr << "\n\nAn unknown error occurred. " << error_message;
+// 		return 1;
+// 	}
+// }
 
 // int main(int argc, char* argv[]) {
 // 	using namespace boost::program_options;

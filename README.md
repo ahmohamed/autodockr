@@ -7,7 +7,7 @@ This is an R interface to allow calling Autodock Vina from whithin R. The packag
 In R console, type:
 
 ```r
-  library(devtools)   
+  library(devtools)
   install_github(repo="ahmohamed/autodockr")
 ```
 
@@ -19,4 +19,9 @@ R CMD INSTALL autodockr
 ```
 
 # Usage
-Currently there is a single function `vina` without parameters. When run, it will spit out a file read error. This indicates that it could call Autodock Vina successfully. (Will add parameters, example later).
+Currently there is a single function `vina` that accepts file paths for target proteins and ligands in PDBQT format. You can test run by:
+
+```r
+library(autodockr)
+example(vina)
+```
