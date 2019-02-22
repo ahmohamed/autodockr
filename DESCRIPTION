@@ -7,3 +7,4 @@ Author: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>
 Maintainer: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>
 Description: Call Autodock Vina from R
 License: MIT
+RoxygenNote: 6.1.1
