@@ -485,15 +485,12 @@ int main_with_args(std::string rigid_name, std::string ligand_name, std::string 
 	}
 	catch(usage_error& e) {
 		throw vina_error(std::string("\n\nUsage error: ") + e.what() + ".\n");
-		return 1;
 	}
 	catch(parse_error& e) {
-		std::cerr << "\n\nParse error on line " << e.line << " in file \"" << e.file.native_file_string() << "\": " << e.reason << '\n';
-		return 1;
+		throw vina_error(std::string("\n\nParse error on line ") + e.line + " in file \"" + e.file.native_file_string() + "\": " + e.reason + '\n');
 	}
 	catch(std::bad_alloc&) {
-		std::cerr << "\n\nError: insufficient memory!\n";
-		return 1;
+		throw vina_error(std::string("\n\nError: insufficient memory!\n"));
 	}
 }
 int main_backup(int argc, char const *argv[]) {
