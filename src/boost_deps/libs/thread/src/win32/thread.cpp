@@ -20,16 +20,16 @@
 #include <boost/thread/detail/tss_hooks.hpp>
 #include <boost/date_time/posix_time/conversion.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace
     {
-        boost::once_flag current_thread_tls_init_flag=BOOST_ONCE_INIT;
+        vinaboost::once_flag current_thread_tls_init_flag=BOOST_ONCE_INIT;
         DWORD current_thread_tls_key=0;
 
         void create_current_thread_tls_key()
         {
-            tss_cleanup_implemented(); // if anyone uses TSS, we need the cleanup linked in
+            vinaboosttss_cleanup_implemented(); // if anyone uses TSS, we need the cleanup linked in
             current_thread_tls_key=TlsAlloc();
             BOOST_ASSERT(current_thread_tls_key!=TLS_OUT_OF_INDEXES);
         }
@@ -54,7 +54,7 @@ namespace boost
 
         void set_current_thread_data(detail::thread_data_base* new_data)
         {
-            boost::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
+            vinaboost::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
             BOOST_VERIFY(TlsSetValue(current_thread_tls_key,new_data));
         }
 
@@ -98,10 +98,10 @@ namespace boost
     {
         struct thread_exit_callback_node
         {
-            boost::detail::thread_exit_function_base* func;
+            vinaboost::detail::thread_exit_function_base* func;
             thread_exit_callback_node* next;
 
-            thread_exit_callback_node(boost::detail::thread_exit_function_base* func_,
+            thread_exit_callback_node(vinaboost::detail::thread_exit_function_base* func_,
                                       thread_exit_callback_node* next_):
                 func(func_),next(next_)
             {}
@@ -110,11 +110,11 @@ namespace boost
         struct tss_data_node
         {
             void const* key;
-            boost::shared_ptr<boost::detail::tss_cleanup_function> func;
+            vinaboost::shared_ptr<vinaboost::detail::tss_cleanup_function> func;
             void* value;
             tss_data_node* next;
 
-            tss_data_node(void const* key_,boost::shared_ptr<boost::detail::tss_cleanup_function> func_,void* value_,
+            tss_data_node(void const* key_,vinaboost::shared_ptr<vinaboost::detail::tss_cleanup_function> func_,void* value_,
                           tss_data_node* next_):
                 key(key_),func(func_),value(value_),next(next_)
             {}
@@ -138,9 +138,9 @@ namespace boost
                         if(current_node->func)
                         {
                             (*current_node->func)();
-                            boost::detail::heap_delete(current_node->func);
+                            vinaboost::detail::heap_delete(current_node->func);
                         }
-                        boost::detail::heap_delete(current_node);
+                        vinaboost::detail::heap_delete(current_node);
                     }
                     while(current_thread_data->tss_data)
                     {
@@ -150,7 +150,7 @@ namespace boost
                         {
                             (*current_node->func)(current_node->value);
                         }
-                        boost::detail::heap_delete(current_node);
+                        vinaboost::detail::heap_delete(current_node);
                     }
                 }
                 
@@ -261,7 +261,7 @@ namespace boost
         }
     }
 
-    bool thread::timed_join(boost::system_time const& wait_until)
+    bool thread::timed_join(vinaboost::system_time const& wait_until)
     {
         detail::thread_data_ptr local_thread_info=get_thread_info();
         if(local_thread_info)
@@ -316,7 +316,7 @@ namespace boost
 
     detail::thread_data_ptr thread::get_thread_info() const
     {
-        boost::mutex::scoped_lock l(thread_info_mutex);
+        vinaboost::mutex::scoped_lock l(thread_info_mutex);
         return thread_info;
     }
 
@@ -557,7 +557,7 @@ namespace boost
             return NULL;
         }
         
-        void set_tss_data(void const* key,boost::shared_ptr<tss_cleanup_function> func,void* tss_data,bool cleanup_existing)
+        void set_tss_data(void const* key,vinaboost::shared_ptr<tss_cleanup_function> func,void* tss_data,bool cleanup_existing)
         {
             if(tss_data_node* const current_node=find_tss_data(key))
             {
@@ -579,19 +579,19 @@ namespace boost
 }
 
 
-extern "C" BOOST_THREAD_DECL void on_process_enter()
+extern "C" BOOST_THREAD_DECL void vinabooston_process_enter()
 {}
 
-extern "C" BOOST_THREAD_DECL void on_thread_enter()
+extern "C" BOOST_THREAD_DECL void vinabooston_thread_enter()
 {}
 
-extern "C" BOOST_THREAD_DECL void on_process_exit()
+extern "C" BOOST_THREAD_DECL void vinabooston_process_exit()
 {
-    boost::cleanup_tls_key();
+    vinaboost::cleanup_tls_key();
 }
 
-extern "C" BOOST_THREAD_DECL void on_thread_exit()
+extern "C" BOOST_THREAD_DECL void vinabooston_thread_exit()
 {
-    boost::run_thread_exit_callbacks();
+    vinaboost::run_thread_exit_callbacks();
 }
 

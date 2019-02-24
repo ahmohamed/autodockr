@@ -58,7 +58,7 @@ extern char** environ;
 
 using namespace std;
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
 #ifndef BOOST_NO_STD_WSTRING
     namespace {
@@ -71,12 +71,12 @@ namespace boost { namespace program_options {
             
             std::transform(opt.value.begin(), opt.value.end(),
                            back_inserter(result.value),
-                           boost::bind(from_utf8, _1));
+                           vinaboost::bind(from_utf8, _1));
 
             std::transform(opt.original_tokens.begin(), 
                            opt.original_tokens.end(),
                            back_inserter(result.original_tokens),
-                           boost::bind(from_utf8, _1));
+                           vinaboost::bind(from_utf8, _1));
             return result;
         }
     }
@@ -105,7 +105,7 @@ namespace boost { namespace program_options {
             const option_description& d = *options[i];
 
             if (d.long_name().empty())
-                boost::throw_exception(
+                vinaboost::throw_exception(
                     error("long name required for config file"));
 
             allowed_options.insert(d.long_name());

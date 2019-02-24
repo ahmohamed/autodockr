@@ -19,7 +19,7 @@
 #if defined( BOOST_USE_WINDOWS_H )
 # include <windows.h>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -83,7 +83,7 @@ typedef void* HANDLE;
 #  endif
 # endif
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -150,7 +150,7 @@ namespace boost
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -283,7 +283,7 @@ namespace boost
 
 #if defined(BOOST_MSVC) && (_MSC_VER>=1400)  && !defined(UNDER_CE)
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -315,7 +315,7 @@ namespace boost
 }
 #define BOOST_THREAD_BTS_DEFINED
 #elif (defined(BOOST_MSVC) || defined(BOOST_INTEL_WIN)) && defined(_M_IX86)
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -349,7 +349,7 @@ namespace boost
 
 #ifndef BOOST_THREAD_BTS_DEFINED
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {

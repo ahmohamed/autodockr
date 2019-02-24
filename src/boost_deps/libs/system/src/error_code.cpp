@@ -22,8 +22,8 @@
 #include <cstdlib>
 #include <cassert>
 
-using namespace boost::system;
-using namespace boost::system::errc;
+using namespace vinaboost::system;
+using namespace vinaboost::system::errc;
 
 #include <cstring> // for strerror/strerror_r
 
@@ -406,7 +406,7 @@ namespace
 
 } // unnamed namespace
 
-namespace boost
+namespace vinaboost
 {
   namespace system
   {
@@ -432,4 +432,4 @@ namespace boost
     }
 
   } // namespace system
-} // namespace boost
+} // namespace vinaboost

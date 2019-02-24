@@ -79,8 +79,8 @@
 // Daniel Wallin discovered that bind/apply.hpp badly interacts with the apply<>
 // member template of a factory as used in the optional<> implementation.
 // He proposed this simple fix which is to move the call to apply<> outside
-// namespace boost.
-namespace boost_optional_detail
+// namespace vinaboost.
+namespace vinaboost_optional_detail
 {
   template <class T, class Factory>
   void construct(Factory const& factory, void* address)
@@ -90,7 +90,7 @@ namespace boost_optional_detail
 }
 
 
-namespace boost {
+namespace vinaboost {
 
 class in_place_factory_base ;
 class typed_in_place_factory_base ;
@@ -109,7 +109,7 @@ class aligned_storage
     {
         char data[ sizeof(T) ];
         BOOST_DEDUCED_TYPENAME type_with_alignment<
-          ::boost::alignment_of<T>::value >::type aligner_;
+          ::vinaboost::alignment_of<T>::value >::type aligner_;
     } dummy_ ;
 
   public:
@@ -150,7 +150,7 @@ class optional_base : public optional_tag
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
     BOOST_DEDUCED_TYPENAME
 #endif 
-    ::boost::detail::make_reference_content<T>::type internal_type ;
+    ::vinaboost::detail::make_reference_content<T>::type internal_type ;
 
     typedef aligned_storage<internal_type> storage_type ;
 
@@ -321,8 +321,8 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr const& factory, in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::boost::mpl::not_<is_reference_predicate>::value ) ;
-       boost_optional_detail::construct<value_type>(factory, m_storage.address());
+       BOOST_STATIC_ASSERT ( ::vinaboost::mpl::not_<is_reference_predicate>::value ) ;
+       vinaboost_optional_detail::construct<value_type>(factory, m_storage.address());
        m_initialized = true ;
      }
 
@@ -330,7 +330,7 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr const& factory, typed_in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::boost::mpl::not_<is_reference_predicate>::value ) ;
+       BOOST_STATIC_ASSERT ( ::vinaboost::mpl::not_<is_reference_predicate>::value ) ;
        factory.apply(m_storage.address()) ;
        m_initialized = true ;
      }
@@ -916,7 +916,7 @@ template<class T> inline void swap ( optional<T>& x, optional<T>& y )
 }
 
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif
 

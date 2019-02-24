@@ -17,10 +17,10 @@
 
 #include <boost/integer_fwd.hpp>  // self include
 
-#include <boost/integer_traits.hpp>  // for boost::integer_traits
+#include <boost/integer_traits.hpp>  // for vinaboost::integer_traits
 #include <boost/limits.hpp>          // for std::numeric_limits
 
-namespace boost
+namespace vinaboost
 {
 
   //  Helper templates  ------------------------------------------------------//
@@ -122,6 +122,6 @@ namespace boost
   };
 
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif  // BOOST_INTEGER_HPP

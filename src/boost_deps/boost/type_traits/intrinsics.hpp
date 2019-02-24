@@ -56,11 +56,11 @@
 #   else
 #    include <type_traits.h>
 #   endif
-#   define BOOST_IS_POD(T) ::boost::is_same< typename ::__type_traits<T>::is_POD_type, ::__true_type>::value
-#   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) ::boost::is_same< typename ::__type_traits<T>::has_trivial_default_constructor, ::__true_type>::value
-#   define BOOST_HAS_TRIVIAL_COPY(T) ::boost::is_same< typename ::__type_traits<T>::has_trivial_copy_constructor, ::__true_type>::value
-#   define BOOST_HAS_TRIVIAL_ASSIGN(T) ::boost::is_same< typename ::__type_traits<T>::has_trivial_assignment_operator, ::__true_type>::value
-#   define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) ::boost::is_same< typename ::__type_traits<T>::has_trivial_destructor, ::__true_type>::value
+#   define BOOST_IS_POD(T) ::vinaboost::is_same< typename ::__type_traits<T>::is_POD_type, ::__true_type>::value
+#   define BOOST_HAS_TRIVIAL_CONSTRUCTOR(T) ::vinaboost::is_same< typename ::__type_traits<T>::has_trivial_default_constructor, ::__true_type>::value
+#   define BOOST_HAS_TRIVIAL_COPY(T) ::vinaboost::is_same< typename ::__type_traits<T>::has_trivial_copy_constructor, ::__true_type>::value
+#   define BOOST_HAS_TRIVIAL_ASSIGN(T) ::vinaboost::is_same< typename ::__type_traits<T>::has_trivial_assignment_operator, ::__true_type>::value
+#   define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) ::vinaboost::is_same< typename ::__type_traits<T>::has_trivial_destructor, ::__true_type>::value
 
 #   ifdef __sgi
 #      define BOOST_HAS_TYPE_TRAITS_INTRINSICS

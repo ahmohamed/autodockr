@@ -43,24 +43,24 @@
 
 //----------------------------------------------------------------------------//
 
-namespace boost
+namespace vinaboost
 {
   namespace filesystem
   {
 
-// typedef boost::filesystem::path Path; needs to be in namespace boost::filesystem
+// typedef vinaboost::filesystem::path Path; needs to be in namespace vinaboost::filesystem
 # ifndef BOOST_FILESYSTEM_NARROW_ONLY
 #   define BOOST_FS_FUNC(BOOST_FS_TYPE) \
-      template<class Path> typename boost::enable_if<is_basic_path<Path>, \
+      template<class Path> typename vinaboost::enable_if<is_basic_path<Path>, \
       BOOST_FS_TYPE>::type
 #   define BOOST_INLINE_FS_FUNC(BOOST_FS_TYPE) \
-      template<class Path> inline typename boost::enable_if<is_basic_path<Path>, \
+      template<class Path> inline typename vinaboost::enable_if<is_basic_path<Path>, \
       BOOST_FS_TYPE>::type
 #   define BOOST_FS_TYPENAME typename
 # else
 #   define BOOST_FS_FUNC(BOOST_FS_TYPE) inline BOOST_FS_TYPE
 #   define BOOST_INLINE_FS_FUNC(BOOST_FS_TYPE) inline BOOST_FS_TYPE
-    typedef boost::filesystem::path Path;
+    typedef vinaboost::filesystem::path Path;
 #   define BOOST_FS_TYPENAME
 # endif
 
@@ -117,9 +117,9 @@ namespace boost
     struct space_info
     {
       // all values are byte counts
-      boost::uintmax_t capacity;
-      boost::uintmax_t free;      // <= capacity
-      boost::uintmax_t available; // <= free
+      vinaboost::uintmax_t capacity;
+      vinaboost::uintmax_t free;      // <= capacity
+      vinaboost::uintmax_t available; // <= free
     };
 
     namespace detail
@@ -127,7 +127,7 @@ namespace boost
       typedef std::pair< system::error_code, bool >
         query_pair;
 
-      typedef std::pair< system::error_code, boost::uintmax_t >
+      typedef std::pair< system::error_code, vinaboost::uintmax_t >
         uintmax_pair;
 
       typedef std::pair< system::error_code, std::time_t >
@@ -192,7 +192,7 @@ namespace boost
 
 #     if !defined(BOOST_FILESYSTEM_NARROW_ONLY)
 
-      BOOST_FILESYSTEM_DECL  boost::filesystem::file_status
+      BOOST_FILESYSTEM_DECL  vinaboost::filesystem::file_status
         status_api( const std::wstring & ph, system::error_code & ec );
       BOOST_FILESYSTEM_DECL query_pair 
         is_empty_api( const std::wstring & ph );
@@ -258,8 +258,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-        "boost::filesystem::status", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+        "vinaboost::filesystem::status", ph, ec ) );
       return result;
     }
 
@@ -277,8 +277,8 @@ namespace boost
       system::error_code ec;
       file_status result( symlink_status( ph, ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-        "boost::filesystem::symlink_status", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+        "vinaboost::filesystem::symlink_status", ph, ec ) );
       return result;
     }
 
@@ -292,8 +292,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::exists", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::exists", ph, ec ) );
       return exists( result );
     }
 
@@ -302,8 +302,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_directory", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_directory", ph, ec ) );
       return is_directory( result );
     }
 
@@ -312,8 +312,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_regular_file", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_regular_file", ph, ec ) );
       return is_regular_file( result );
     }
 
@@ -323,8 +323,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_regular", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_regular", ph, ec ) );
       return is_regular( result );
     }
 # endif
@@ -334,8 +334,8 @@ namespace boost
       system::error_code ec;
       file_status result( detail::status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_other", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_other", ph, ec ) );
       return is_other( result );
     }
 
@@ -350,15 +350,15 @@ namespace boost
       system::error_code ec;
       file_status result( detail::symlink_status_api( ph.external_file_string(), ec ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_symlink", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_symlink", ph, ec ) );
       return is_symlink( result );
 #   endif
     }
 
     // VC++ 7.0 and earlier has a serious namespace bug that causes a clash
-    // between boost::filesystem::is_empty and the unrelated type trait
-    // boost::is_empty.
+    // between vinaboost::filesystem::is_empty and the unrelated type trait
+    // vinaboost::is_empty.
 
 # if !defined( BOOST_MSVC ) || BOOST_MSVC > 1300
     BOOST_FS_FUNC(bool) is_empty( const Path & ph )
@@ -369,8 +369,8 @@ namespace boost
       detail::query_pair result(
         detail::is_empty_api( ph.external_file_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::is_empty", ph, result.first ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::is_empty", ph, result.first ) );
       return result.second;
     }
 
@@ -379,18 +379,18 @@ namespace boost
       detail::query_pair result( detail::equivalent_api(
         ph1.external_file_string(), ph2.external_file_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::equivalent", ph1, ph2, result.first ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::equivalent", ph1, ph2, result.first ) );
       return result.second;
     }
 
-    BOOST_FS_FUNC(boost::uintmax_t) file_size( const Path & ph )
+    BOOST_FS_FUNC(vinaboost::uintmax_t) file_size( const Path & ph )
     {
       detail::uintmax_pair result
         ( detail::file_size_api( ph.external_file_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::file_size", ph, result.first ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::file_size", ph, result.first ) );
       return result.second;
     }
 
@@ -399,8 +399,8 @@ namespace boost
       detail::space_pair result
         ( detail::space_api( ph.external_file_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::space", ph, result.first ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::space", ph, result.first ) );
       return result.second;
     }
 
@@ -409,8 +409,8 @@ namespace boost
       detail::time_pair result
         ( detail::last_write_time_api( ph.external_file_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::last_write_time", ph, result.first ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::last_write_time", ph, result.first ) );
       return result.second;
     }
 
@@ -422,8 +422,8 @@ namespace boost
       detail::query_pair result(
         detail::create_directory_api( dir_ph.external_directory_string() ) );
       if ( result.first )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::create_directory",
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::create_directory",
           dir_ph, result.first ) );
       return result.second;
     }
@@ -437,8 +437,8 @@ namespace boost
           to_ph.external_file_string(),
           from_ph.external_file_string() ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::create_hard_link",
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::create_hard_link",
           to_ph, from_ph, ec ) );
     }
 
@@ -461,8 +461,8 @@ namespace boost
           to_ph.external_file_string(),
           from_ph.external_file_string() ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::create_symlink",
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::create_symlink",
           to_ph, from_ph, ec ) );
     }
 
@@ -481,8 +481,8 @@ namespace boost
       system::error_code ec;
       file_status f = symlink_status( ph, ec );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::remove", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::remove", ph, ec ) );
       return detail::remove_aux( ph, f );
     }
 
@@ -491,8 +491,8 @@ namespace boost
       system::error_code ec;
       file_status f = symlink_status( ph, ec );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::remove_all", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::remove_all", ph, ec ) );
       return exists( f ) ? detail::remove_all_aux( ph, f ) : 0;
     }
 
@@ -502,8 +502,8 @@ namespace boost
         from_path.external_directory_string(),
         to_path.external_directory_string() ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::rename",
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::rename",
           from_path, to_path, ec ) );
     }
 
@@ -518,8 +518,8 @@ namespace boost
         from_path.external_directory_string(),
         to_path.external_directory_string(), option == copy_option::fail_if_exists ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::copy_file",
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::copy_file",
           from_path, to_path, ec ) );
     }
 
@@ -529,8 +529,8 @@ namespace boost
       typename Path::external_string_type ph;
       system::error_code ec( detail::get_current_path_api( ph ) );
       if ( ec )
-          boost::throw_exception( basic_filesystem_error<Path>(
-            "boost::filesystem::current_path", ec ) );
+          vinaboost::throw_exception( basic_filesystem_error<Path>(
+            "vinaboost::filesystem::current_path", ec ) );
       return Path( Path::traits_type::to_internal( ph ) );
     }
 
@@ -539,8 +539,8 @@ namespace boost
       system::error_code ec( detail::set_current_path_api(
         ph.external_directory_string() ) );
       if ( ec )
-          boost::throw_exception( basic_filesystem_error<Path>(
-            "boost::filesystem::current_path", ph, ec ) );
+          vinaboost::throw_exception( basic_filesystem_error<Path>(
+            "vinaboost::filesystem::current_path", ph, ec ) );
     }
 
     template< class Path >
@@ -554,9 +554,9 @@ namespace boost
 # ifndef BOOST_FILESYSTEM_NO_DEPRECATED
     // legacy support
     inline path current_path()  // overload supports pre-i18n apps
-      { return current_path<boost::filesystem::path>(); }
+      { return current_path<vinaboost::filesystem::path>(); }
     inline const path & initial_path() // overload supports pre-i18n apps
-      { return initial_path<boost::filesystem::path>(); }
+      { return initial_path<vinaboost::filesystem::path>(); }
 # endif
 
     BOOST_FS_FUNC(Path) system_complete( const Path & ph )
@@ -567,8 +567,8 @@ namespace boost
       system::error_code ec( detail::get_full_path_name_api( ph.external_file_string(),
               sys_ph ) );
       if ( ec )
-          boost::throw_exception( basic_filesystem_error<Path>(
-            "boost::filesystem::system_complete", ph, ec ) );
+          vinaboost::throw_exception( basic_filesystem_error<Path>(
+            "vinaboost::filesystem::system_complete", ph, ec ) );
       return Path( Path::traits_type::to_internal( sys_ph ) );
 # else
       return (ph.empty() || ph.is_complete())
@@ -582,7 +582,7 @@ namespace boost
     {
       BOOST_ASSERT( base.is_complete()
         && (ph.is_complete() || !ph.has_root_name())
-        && "boost::filesystem::complete() precondition not met" );
+        && "vinaboost::filesystem::complete() precondition not met" );
 #   ifdef BOOST_WINDOWS_PATH
       if (ph.empty() || ph.is_complete()) return ph;
       if ( !ph.has_root_name() )
@@ -606,8 +606,8 @@ namespace boost
       system::error_code ec( detail::last_write_time_api( ph.external_file_string(),
           new_time ) );
       if ( ec )
-        boost::throw_exception( basic_filesystem_error<Path>(
-          "boost::filesystem::last_write_time", ph, ec ) );
+        vinaboost::throw_exception( basic_filesystem_error<Path>(
+          "vinaboost::filesystem::last_write_time", ph, ec ) );
     }
 
 # ifndef BOOST_FILESYSTEM_NARROW_ONLY
@@ -665,18 +665,18 @@ namespace boost
       { return is_symlink<wpath>( ph ); }
 
     inline bool is_empty( const path & ph )
-      { return boost::filesystem::is_empty<path>( ph ); }
+      { return vinaboost::filesystem::is_empty<path>( ph ); }
     inline bool is_empty( const wpath & ph )
-      { return boost::filesystem::is_empty<wpath>( ph ); }
+      { return vinaboost::filesystem::is_empty<wpath>( ph ); }
 
     inline bool equivalent( const path & ph1, const path & ph2 )
       { return equivalent<path>( ph1, ph2 ); }
     inline bool equivalent( const wpath & ph1, const wpath & ph2 )
       { return equivalent<wpath>( ph1, ph2 ); }
 
-    inline boost::uintmax_t file_size( const path & ph )
+    inline vinaboost::uintmax_t file_size( const path & ph )
       { return file_size<path>( ph ); }
-    inline boost::uintmax_t file_size( const wpath & ph )
+    inline vinaboost::uintmax_t file_size( const wpath & ph )
       { return file_size<wpath>( ph ); }
 
     inline space_info space( const path & ph )
@@ -782,8 +782,8 @@ namespace boost
         {
           system::error_code ec = remove_api( ph.external_file_string() );
           if ( ec )
-            boost::throw_exception( basic_filesystem_error<Path>(
-              "boost::filesystem::remove", ph, ec ) );
+            vinaboost::throw_exception( basic_filesystem_error<Path>(
+              "vinaboost::filesystem::remove", ph, ec ) );
           return true;
         }
         return false;
@@ -792,19 +792,19 @@ namespace boost
       template<class Path>
       unsigned long remove_all_aux( const Path & ph, file_status f )
       {
-        static const boost::filesystem::basic_directory_iterator<Path> end_itr;
+        static const vinaboost::filesystem::basic_directory_iterator<Path> end_itr;
         unsigned long count = 1;
-        if ( !boost::filesystem::is_symlink( f ) // don't recurse symbolic links
-          && boost::filesystem::is_directory( f ) )
+        if ( !vinaboost::filesystem::is_symlink( f ) // don't recurse symbolic links
+          && vinaboost::filesystem::is_directory( f ) )
         {
-          for ( boost::filesystem::basic_directory_iterator<Path> itr( ph );
+          for ( vinaboost::filesystem::basic_directory_iterator<Path> itr( ph );
                 itr != end_itr; ++itr )
           {
-            boost::system::error_code ec;
-            boost::filesystem::file_status fn = boost::filesystem::symlink_status( itr->path(), ec );
+            vinaboost::system::error_code ec;
+            vinaboost::filesystem::file_status fn = vinaboost::filesystem::symlink_status( itr->path(), ec );
             if ( ec )
-              boost::throw_exception( basic_filesystem_error<Path>( 
-                "boost::filesystem:remove_all", ph, ec ) );
+              vinaboost::throw_exception( basic_filesystem_error<Path>( 
+                "vinaboost::filesystem:remove_all", ph, ec ) );
             count += remove_all_aux( itr->path(), fn );
           }
         }
@@ -889,10 +889,10 @@ namespace boost
 
     template< class Path >
     class basic_directory_iterator
-      : public boost::iterator_facade<
+      : public vinaboost::iterator_facade<
           basic_directory_iterator<Path>,
           basic_directory_entry<Path>,
-          boost::single_pass_traversal_tag >
+          vinaboost::single_pass_traversal_tag >
     {
     public:
       typedef Path path_type;
@@ -906,14 +906,14 @@ namespace boost
 
       // shared_ptr provides shallow-copy semantics required for InputIterators.
       // m_imp.get()==0 indicates the end iterator.
-      boost::shared_ptr< detail::dir_itr_imp< Path > >  m_imp;
+      vinaboost::shared_ptr< detail::dir_itr_imp< Path > >  m_imp;
 
-      friend class boost::iterator_core_access;
+      friend class vinaboost::iterator_core_access;
 
-      typename boost::iterator_facade<
+      typename vinaboost::iterator_facade<
         basic_directory_iterator<Path>,
         basic_directory_entry<Path>,
-        boost::single_pass_traversal_tag >::reference dereference() const 
+        vinaboost::single_pass_traversal_tag >::reference dereference() const 
       {
         BOOST_ASSERT( m_imp.get() && "attempt to dereference end iterator" );
         return m_imp->m_directory_entry;
@@ -969,7 +969,7 @@ namespace boost
               && name.size() == 2)) )
           {  increment(); }
       }
-      return boost::system::error_code();
+      return vinaboost::system::error_code();
     }
 
     template<class Path>
@@ -980,8 +980,8 @@ namespace boost
       system::error_code ec( m_init(dir_path) );
       if ( ec )
       {
-        boost::throw_exception( basic_filesystem_error<Path>( 
-          "boost::filesystem::basic_directory_iterator constructor",
+        vinaboost::throw_exception( basic_filesystem_error<Path>( 
+          "vinaboost::filesystem::basic_directory_iterator constructor",
           dir_path, ec ) );
       }
     }
@@ -1013,8 +1013,8 @@ namespace boost
           name, fs, symlink_fs );
         if ( ec )
         {
-          boost::throw_exception( basic_filesystem_error<Path>(  
-            "boost::filesystem::basic_directory_iterator increment",
+          vinaboost::throw_exception( basic_filesystem_error<Path>(  
+            "vinaboost::filesystem::basic_directory_iterator increment",
             m_imp->m_directory_entry.path().parent_path(), ec ) );
         }
         if ( m_imp->m_handle == 0 ) { m_imp.reset(); return; } // eof, make end
@@ -1116,9 +1116,9 @@ namespace boost
         if ( status_known( m_symlink_status )
           && !is_symlink( m_symlink_status ) )
           { m_status = m_symlink_status; }
-        else { m_status = boost::filesystem::status( m_path ); }
+        else { m_status = vinaboost::filesystem::status( m_path ); }
 #     else
-        m_status = boost::filesystem::status( m_path );
+        m_status = vinaboost::filesystem::status( m_path );
 #     endif
       }
       return m_status;
@@ -1133,13 +1133,13 @@ namespace boost
 #     ifndef BOOST_WINDOWS_API
         if ( status_known( m_symlink_status )
           && !is_symlink( m_symlink_status ) )
-          { ec = boost::system::error_code();; m_status = m_symlink_status; }
-        else { m_status = boost::filesystem::status( m_path, ec ); }
+          { ec = vinaboost::system::error_code();; m_status = m_symlink_status; }
+        else { m_status = vinaboost::filesystem::status( m_path, ec ); }
 #     else
-        m_status = boost::filesystem::status( m_path, ec );
+        m_status = vinaboost::filesystem::status( m_path, ec );
 #     endif
       }
-      else ec = boost::system::error_code();;
+      else ec = vinaboost::system::error_code();;
       return m_status;
     }
 
@@ -1149,7 +1149,7 @@ namespace boost
     {
 #   ifndef BOOST_WINDOWS_API
       if ( !status_known( m_symlink_status ) )
-        { m_symlink_status = boost::filesystem::symlink_status( m_path ); }
+        { m_symlink_status = vinaboost::filesystem::symlink_status( m_path ); }
       return m_symlink_status;
 #   else
       return status();
@@ -1162,15 +1162,15 @@ namespace boost
     {
 #   ifndef BOOST_WINDOWS_API
       if ( !status_known( m_symlink_status ) )
-        { m_symlink_status = boost::filesystem::symlink_status( m_path, ec ); }
-      else ec = boost::system::error_code();;
+        { m_symlink_status = vinaboost::filesystem::symlink_status( m_path, ec ); }
+      else ec = vinaboost::system::error_code();;
       return m_symlink_status;
 #   else
       return status( ec );
 #   endif
     }
   } // namespace filesystem
-} // namespace boost
+} // namespace vinaboost
 
 #undef BOOST_FS_FUNC
 

@@ -19,7 +19,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -46,7 +46,7 @@ namespace boost
                 waiters(1),notified(false),references(0)
             {}
 
-            static bool no_waiters(boost::intrusive_ptr<basic_cv_list_entry> const& entry)
+            static bool no_waiters(vinaboost::intrusive_ptr<basic_cv_list_entry> const& entry)
             {
                 return !detail::interlocked_read_acquire(&entry->waiters);
             }
@@ -108,13 +108,13 @@ namespace boost
 
         class basic_condition_variable
         {
-            boost::mutex internal_mutex;
+            vinaboost::mutex internal_mutex;
             long total_count;
             unsigned active_generation_count;
 
             typedef basic_cv_list_entry list_entry;
 
-            typedef boost::intrusive_ptr<list_entry> entry_ptr;
+            typedef vinaboost::intrusive_ptr<list_entry> entry_ptr;
             typedef std::vector<entry_ptr> generation_list;
 
             generation_list generations;
@@ -156,7 +156,7 @@ namespace boost
 
             entry_ptr get_wait_entry()
             {
-                boost::lock_guard<boost::mutex> internal_lock(internal_mutex);
+                vinaboost::lock_guard<vinaboost::mutex> internal_lock(internal_mutex);
 
                 if(!wake_sem)
                 {
@@ -251,7 +251,7 @@ namespace boost
             {
                 if(detail::interlocked_read_acquire(&total_count))
                 {
-                    boost::lock_guard<boost::mutex> internal_lock(internal_mutex);
+                    vinaboost::lock_guard<vinaboost::mutex> internal_lock(internal_mutex);
                     if(!total_count)
                     {
                         return;
@@ -272,7 +272,7 @@ namespace boost
             {
                 if(detail::interlocked_read_acquire(&total_count))
                 {
-                    boost::lock_guard<boost::mutex> internal_lock(internal_mutex);
+                    vinaboost::lock_guard<vinaboost::mutex> internal_lock(internal_mutex);
                     if(!total_count)
                     {
                         return;
@@ -317,12 +317,12 @@ namespace boost
         }
         
 
-        bool timed_wait(unique_lock<mutex>& m,boost::system_time const& wait_until)
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::system_time const& wait_until)
         {
             return do_wait(m,wait_until);
         }
 
-        bool timed_wait(unique_lock<mutex>& m,boost::xtime const& wait_until)
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::xtime const& wait_until)
         {
             return do_wait(m,system_time(wait_until));
         }
@@ -333,12 +333,12 @@ namespace boost
         }
 
         template<typename predicate_type>
-        bool timed_wait(unique_lock<mutex>& m,boost::system_time const& wait_until,predicate_type pred)
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::system_time const& wait_until,predicate_type pred)
         {
             return do_wait(m,wait_until,pred);
         }
         template<typename predicate_type>
-        bool timed_wait(unique_lock<mutex>& m,boost::xtime const& wait_until,predicate_type pred)
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::xtime const& wait_until,predicate_type pred)
         {
             return do_wait(m,system_time(wait_until),pred);
         }
@@ -375,13 +375,13 @@ namespace boost
         }
         
         template<typename lock_type>
-        bool timed_wait(lock_type& m,boost::system_time const& wait_until)
+        bool timed_wait(lock_type& m,vinaboost::system_time const& wait_until)
         {
             return do_wait(m,wait_until);
         }
 
         template<typename lock_type>
-        bool timed_wait(lock_type& m,boost::xtime const& wait_until)
+        bool timed_wait(lock_type& m,vinaboost::xtime const& wait_until)
         {
             return do_wait(m,system_time(wait_until));
         }
@@ -393,13 +393,13 @@ namespace boost
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,boost::system_time const& wait_until,predicate_type pred)
+        bool timed_wait(lock_type& m,vinaboost::system_time const& wait_until,predicate_type pred)
         {
             return do_wait(m,wait_until,pred);
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,boost::xtime const& wait_until,predicate_type pred)
+        bool timed_wait(lock_type& m,vinaboost::xtime const& wait_until,predicate_type pred)
         {
             return do_wait(m,system_time(wait_until),pred);
         }

@@ -18,11 +18,11 @@
 // (bcc<=5.64 cannot include instance data in a precompiled header)
 //  -- * To be verified, now that there's no unnamed namespace
 
-namespace boost {
+namespace vinaboost {
 
 none_t const none = ((none_t)0) ;
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif
 

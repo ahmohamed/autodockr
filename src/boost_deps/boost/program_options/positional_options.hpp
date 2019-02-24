@@ -11,7 +11,7 @@
 #include <vector>
 #include <string>
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     /** Describes positional options. 
 

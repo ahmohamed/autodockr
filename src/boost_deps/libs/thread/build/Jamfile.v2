@@ -20,7 +20,7 @@
 #
 # The naming of the resulting libraries is mostly the same for the
 # variant native to the build platform, i.e.
-# boost_thread and the boost specific tagging.
+# vinaboost_thread and the boost specific tagging.
 # For the library variant that is not native on the build platform
 # an additional tag is applied:
 # boost_thread_pthread for the pthread variant on windows, and
@@ -196,7 +196,7 @@ alias thread_sources
 
 explicit thread_sources ;
 
-lib boost_thread
+lib vinaboost_thread
     : thread_sources
     : <conditional>@requirements
     :

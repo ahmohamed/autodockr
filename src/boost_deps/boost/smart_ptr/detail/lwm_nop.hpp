@@ -17,7 +17,7 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 //
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -32,6 +32,6 @@ public:
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_SMART_PTR_DETAIL_LWM_NOP_HPP_INCLUDED

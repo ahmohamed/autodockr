@@ -12,7 +12,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     inline void condition_variable::wait(unique_lock<mutex>& m)
     {
@@ -20,7 +20,7 @@ namespace boost
         BOOST_VERIFY(!pthread_cond_wait(&cond,m.mutex()->native_handle()));
     }
 
-    inline bool condition_variable::timed_wait(unique_lock<mutex>& m,boost::system_time const& wait_until)
+    inline bool condition_variable::timed_wait(unique_lock<mutex>& m,vinaboost::system_time const& wait_until)
     {
         detail::interruption_checker check_for_interruption(&cond);
         struct timespec const timeout=detail::get_timespec(wait_until);
@@ -79,7 +79,7 @@ namespace boost
             {
                 detail::interruption_checker check_for_interruption(&cond);
                 {
-                    boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+                    vinaboost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
                     m.unlock();
                     res=pthread_cond_wait(&cond,&internal_mutex);
                 }
@@ -98,14 +98,14 @@ namespace boost
         }
         
         template<typename lock_type>
-        bool timed_wait(lock_type& m,boost::system_time const& wait_until)
+        bool timed_wait(lock_type& m,vinaboost::system_time const& wait_until)
         {
             struct timespec const timeout=detail::get_timespec(wait_until);
             int res=0;
             {
                 detail::interruption_checker check_for_interruption(&cond);
                 {
-                    boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+                    vinaboost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
                     m.unlock();
                     res=pthread_cond_timedwait(&cond,&internal_mutex,&timeout);
                 }
@@ -134,7 +134,7 @@ namespace boost
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,boost::system_time const& wait_until,predicate_type pred)
+        bool timed_wait(lock_type& m,vinaboost::system_time const& wait_until,predicate_type pred)
         {
             while (!pred())
             {
@@ -158,13 +158,13 @@ namespace boost
 
         void notify_one()
         {
-            boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+            vinaboost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
             BOOST_VERIFY(!pthread_cond_signal(&cond));
         }
         
         void notify_all()
         {
-            boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+            vinaboost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
             BOOST_VERIFY(!pthread_cond_broadcast(&cond));
         }
     };

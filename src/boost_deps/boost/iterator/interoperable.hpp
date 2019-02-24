@@ -14,7 +14,7 @@
 
 # include <boost/iterator/detail/config_def.hpp> // must appear last
 
-namespace boost
+namespace vinaboost
 {
 
   //
@@ -43,7 +43,7 @@ namespace boost
   { 
   };
 
-} // namespace boost
+} // namespace vinaboost
 
 # include <boost/iterator/detail/config_undef.hpp>
 

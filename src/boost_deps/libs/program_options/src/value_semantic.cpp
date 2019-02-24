@@ -10,13 +10,13 @@
 
 #include <cctype>
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     using namespace std;
 
     void 
     value_semantic_codecvt_helper<char>::
-    parse(boost::any& value_store, 
+    parse(vinaboost::any& value_store, 
           const std::vector<std::string>& new_tokens,
           bool utf8) const
     {
@@ -30,7 +30,7 @@ namespace boost { namespace program_options {
             }
             xparse(value_store, local_tokens);
 #else
-            boost::throw_exception(
+            vinaboost::throw_exception(
                 std::runtime_error("UTF-8 conversion not supported."));
 #endif
         } else {
@@ -42,7 +42,7 @@ namespace boost { namespace program_options {
 #ifndef BOOST_NO_STD_WSTRING
     void 
     value_semantic_codecvt_helper<wchar_t>::
-    parse(boost::any& value_store, 
+    parse(vinaboost::any& value_store, 
           const std::vector<std::string>& new_tokens,
           bool utf8) const
     {
@@ -92,14 +92,14 @@ namespace boost { namespace program_options {
 
 
     void 
-    untyped_value::xparse(boost::any& value_store,
+    untyped_value::xparse(vinaboost::any& value_store,
                           const std::vector<std::string>& new_tokens) const
     {
         if (!value_store.empty()) 
-            boost::throw_exception(
+            vinaboost::throw_exception(
                 multiple_occurrences("multiple_occurrences"));
         if (new_tokens.size() > 1)
-            boost::throw_exception(multiple_values("multiple_values"));
+            vinaboost::throw_exception(multiple_values("multiple_values"));
         value_store = new_tokens.empty() ? std::string("") : new_tokens.front();
     }
 
@@ -139,7 +139,7 @@ namespace boost { namespace program_options {
         else if (s == "off" || s == "no" || s == "0" || s == "false")
             v = any(false);
         else
-            boost::throw_exception(validation_error(
+            vinaboost::throw_exception(validation_error(
                                 "'" + s + "' doesn't look like a bool value."));
     }
 
@@ -162,7 +162,7 @@ namespace boost { namespace program_options {
         else if (s == L"off" || s == L"no" || s == L"0" || s == L"false")
             v = any(false);
         else
-            boost::throw_exception(validation_error("invalid bool value"));
+            vinaboost::throw_exception(validation_error("invalid bool value"));
     }
 #endif
     BOOST_PROGRAM_OPTIONS_DECL 
@@ -197,10 +197,10 @@ namespace boost { namespace program_options {
     namespace validators {
 
         BOOST_PROGRAM_OPTIONS_DECL 
-        void check_first_occurrence(const boost::any& value)
+        void check_first_occurrence(const vinaboost::any& value)
         {
             if (!value.empty())
-                boost::throw_exception(
+                vinaboost::throw_exception(
                     multiple_occurrences("multiple_occurrences"));
         }
     }

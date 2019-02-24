@@ -18,10 +18,10 @@ project boost/filesystem
 SOURCES =
     operations path portability utf8_codecvt_facet ;
 
-lib boost_filesystem
+lib vinaboost_filesystem
     :
     $(SOURCES).cpp
-    ../../system/build//boost_system
+    ../../system/build//vinaboost_system
     :
     <link>shared:<define>BOOST_ALL_DYN_LINK=1 # tell source we're building dll's
     <link>static:<define>BOOST_All_STATIC_LINK=1 # tell source we're building static lib's
@@ -29,4 +29,4 @@ lib boost_filesystem
     :
     ;
 
-boost-install boost_filesystem ;
+boost-install vinaboost_filesystem ;

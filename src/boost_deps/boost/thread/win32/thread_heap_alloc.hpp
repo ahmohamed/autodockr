@@ -12,7 +12,7 @@
 #if defined( BOOST_USE_WINDOWS_H )
 # include <windows.h>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -31,7 +31,7 @@ namespace boost
 # undef HeapAlloc
 # endif
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -51,7 +51,7 @@ namespace boost
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {

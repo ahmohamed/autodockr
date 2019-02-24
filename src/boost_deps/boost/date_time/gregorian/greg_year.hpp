@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace boost {
+namespace vinaboost {
 namespace gregorian {
 
   //! Exception type for gregorian year

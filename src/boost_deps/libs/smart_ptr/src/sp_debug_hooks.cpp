@@ -106,7 +106,7 @@ void * operator new[](size_t n, nothrow_t const &) throw()
 
 // debug hooks
 
-namespace boost
+namespace vinaboost
 {
 
 void sp_scalar_constructor_hook(void * p)
@@ -184,7 +184,7 @@ void sp_array_destructor_hook(void * /* p */)
 */
 }
 
-} // namespace boost
+} // namespace vinaboost
 
 // operator delete
 

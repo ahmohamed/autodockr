@@ -10,7 +10,7 @@
  */
 
 
-namespace boost {
+namespace vinaboost {
 namespace date_time {
 
 

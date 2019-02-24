@@ -18,7 +18,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 #if !defined( __CODEGEARC__ )
 
@@ -57,9 +57,9 @@ template <class T>
 struct is_signed_imp
 {
    typedef is_signed_select_helper< 
-      ::boost::type_traits::ice_or<
-         ::boost::is_integral<T>::value,
-         ::boost::is_enum<T>::value>::value 
+      ::vinaboost::type_traits::ice_or<
+         ::vinaboost::is_integral<T>::value,
+         ::vinaboost::is_enum<T>::value>::value 
    > selector;
    typedef typename selector::template rebind<T> binder;
    typedef typename binder::type type;
@@ -117,10 +117,10 @@ template <> struct is_signed_imp<const volatile wchar_t> : public true_type{};
 #if defined( __CODEGEARC__ )
 BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_signed,T,__is_signed(T))
 #else
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_signed,T,::boost::detail::is_signed_imp<T>::value)
+BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_signed,T,::vinaboost::detail::is_signed_imp<T>::value)
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 

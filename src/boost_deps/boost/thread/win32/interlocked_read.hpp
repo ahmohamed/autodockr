@@ -18,7 +18,7 @@
 extern "C" void _ReadWriteBarrier(void);
 #pragma intrinsic(_ReadWriteBarrier)
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -50,7 +50,7 @@ namespace boost
 
 #else
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {

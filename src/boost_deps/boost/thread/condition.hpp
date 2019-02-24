@@ -8,7 +8,7 @@
 
 #include <boost/thread/condition_variable.hpp>
 
-namespace boost
+namespace vinaboost
 {
     typedef condition_variable_any condition;
 }

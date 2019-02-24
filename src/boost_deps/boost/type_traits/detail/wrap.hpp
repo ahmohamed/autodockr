@@ -8,11 +8,11 @@
 #ifndef BOOST_TT_DETAIL_WRAP_HPP_INCLUDED
 #define BOOST_TT_DETAIL_WRAP_HPP_INCLUDED
 
-namespace boost {
+namespace vinaboost {
 namespace type_traits {
 
 template <class T> struct wrap {};
 
-}} // namespace boost::type_traits
+}} // namespace vinaboost::type_traits
 
 #endif // BOOST_TT_DETAIL_WRAP_HPP_INCLUDED

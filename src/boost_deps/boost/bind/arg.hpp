@@ -22,7 +22,7 @@
 #include <boost/config.hpp>
 #include <boost/is_placeholder.hpp>
 
-namespace boost
+namespace vinaboost
 {
 
 template< int I > struct arg
@@ -57,6 +57,6 @@ template< int I > struct is_placeholder< arg<I> (*) () >
 
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_BIND_ARG_HPP_INCLUDED

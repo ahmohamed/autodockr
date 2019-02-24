@@ -17,10 +17,10 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     class shared_mutex:
-        private boost::noncopyable
+        private vinaboost::noncopyable
     {
     private:
         struct state_data
@@ -111,7 +111,7 @@ namespace boost
 
         void lock_shared()
         {
-            BOOST_VERIFY(timed_lock_shared(::boost::detail::get_system_time_sentinel()));
+            BOOST_VERIFY(timed_lock_shared(::vinaboost::detail::get_system_time_sentinel()));
         }
 
         template<typename TimeDuration>
@@ -120,7 +120,7 @@ namespace boost
             return timed_lock_shared(get_system_time()+relative_time);
         }
 
-        bool timed_lock_shared(boost::system_time const& wait_until)
+        bool timed_lock_shared(vinaboost::system_time const& wait_until)
         {
             for(;;)
             {
@@ -150,7 +150,7 @@ namespace boost
                     return true;
                 }
                     
-                unsigned long const res=detail::win32::WaitForSingleObject(unlock_sem,::boost::detail::get_milliseconds_until(wait_until));
+                unsigned long const res=detail::win32::WaitForSingleObject(unlock_sem,::vinaboost::detail::get_milliseconds_until(wait_until));
                 if(res==detail::win32::timeout)
                 {
                     for(;;)
@@ -235,7 +235,7 @@ namespace boost
 
         void lock()
         {
-            BOOST_VERIFY(timed_lock(::boost::detail::get_system_time_sentinel()));
+            BOOST_VERIFY(timed_lock(::vinaboost::detail::get_system_time_sentinel()));
         }
 
         template<typename TimeDuration>
@@ -270,7 +270,7 @@ namespace boost
         }
 
 
-        bool timed_lock(boost::system_time const& wait_until)
+        bool timed_lock(vinaboost::system_time const& wait_until)
         {
             for(;;)
             {
@@ -301,7 +301,7 @@ namespace boost
                 {
                     return true;
                 }
-                unsigned long const wait_res=detail::win32::WaitForMultipleObjects(2,semaphores,true,::boost::detail::get_milliseconds_until(wait_until));
+                unsigned long const wait_res=detail::win32::WaitForMultipleObjects(2,semaphores,true,::vinaboost::detail::get_milliseconds_until(wait_until));
                 if(wait_res==detail::win32::timeout)
                 {
                     for(;;)

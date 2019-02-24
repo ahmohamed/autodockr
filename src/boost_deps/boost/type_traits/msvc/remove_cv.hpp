@@ -11,7 +11,7 @@
 #include <boost/type_traits/is_pointer.hpp>
 #include <boost/type_traits/is_array.hpp>
 
-namespace boost {
+namespace vinaboost {
     namespace detail {
         template<bool IsPointer,bool IsArray,bool IsConst,bool IsVolatile>
         struct remove_cv_impl_typeof {
@@ -172,10 +172,10 @@ namespace boost {
     template<typename T>
     struct remove_cv {
         typedef detail::remove_cv_impl_typeof<
-            boost::is_pointer<T>::value,
-            boost::is_array<T>::value,
-            boost::is_const<T>::value,
-            boost::is_volatile<T>::value
+            vinaboost::is_pointer<T>::value,
+            vinaboost::is_array<T>::value,
+            vinaboost::is_const<T>::value,
+            vinaboost::is_volatile<T>::value
         > remove_cv_type;
         typedef typename 
             remove_cv_type::template inner<
@@ -185,6 +185,6 @@ namespace boost {
         type;
         BOOST_MPL_AUX_LAMBDA_SUPPORT(1,remove_cv,T)
     };
-}//namespace boost
+}//namespace vinaboost
 
 #endif //BOOST_TYPE_TRAITS_MSVC_REMOVE_CV_HOLT_2004_0901

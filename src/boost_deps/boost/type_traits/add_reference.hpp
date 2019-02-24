@@ -16,7 +16,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/type_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 namespace detail {
 
@@ -44,7 +44,7 @@ template <typename T>
 struct add_reference_impl
 {
     typedef typename reference_adder<
-          ::boost::is_reference<T>::value
+          ::vinaboost::is_reference<T>::value
         >::template result_<T> result;
 
     typedef typename result::type type;
@@ -74,7 +74,7 @@ BOOST_TT_AUX_TYPE_TRAIT_IMPL_SPEC1(add_reference,void const volatile,void const 
 
 } // namespace detail
 
-BOOST_TT_AUX_TYPE_TRAIT_DEF1(add_reference,T,typename boost::detail::add_reference_impl<T>::type)
+BOOST_TT_AUX_TYPE_TRAIT_DEF1(add_reference,T,typename vinaboost::detail::add_reference_impl<T>::type)
 
 // agurt, 07/mar/03: workaround Borland's ill-formed sensitivity to an additional
 // level of indirection, here
@@ -82,7 +82,7 @@ BOOST_TT_AUX_TYPE_TRAIT_DEF1(add_reference,T,typename boost::detail::add_referen
 BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,add_reference,T&,T&)
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/type_trait_undef.hpp>
 

@@ -21,7 +21,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
 
     class thread_interrupted
@@ -83,7 +83,7 @@ namespace boost
 
         virtual const char* what() const throw()
         {
-            return "boost::lock_error";
+            return "vinaboost::lock_error";
         }
     };
 
@@ -104,7 +104,7 @@ namespace boost
 
         virtual const char* what() const throw()
         {
-            return "boost::thread_resource_error";
+            return "vinaboost::thread_resource_error";
         }
     
     };
@@ -126,7 +126,7 @@ namespace boost
 
         virtual const char* what() const throw()
         {
-            return "boost::unsupported_thread_option";
+            return "vinaboost::unsupported_thread_option";
         }
     
     };
@@ -148,7 +148,7 @@ namespace boost
 
         virtual const char* what() const throw()
         {
-            return "boost::invalid_thread_argument";
+            return "vinaboost::invalid_thread_argument";
         }
     
     };
@@ -170,12 +170,12 @@ namespace boost
 
         virtual const char* what() const throw()
         {
-            return "boost::thread_permission_error";
+            return "vinaboost::thread_permission_error";
         }
     
     };
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/config/abi_suffix.hpp>
 

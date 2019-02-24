@@ -17,7 +17,7 @@
 #include <vector>
 #include <utility>
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     class options_description;
     class positional_options_description;

@@ -10,7 +10,7 @@
 
 #include <boost/config.hpp>
 
-namespace boost {
+namespace vinaboost {
 namespace type_traits {
 
 template <bool b>
@@ -26,6 +26,6 @@ struct ice_not<true>
 };
 
 } // namespace type_traits
-} // namespace boost
+} // namespace vinaboost
 
 #endif // BOOST_TT_DETAIL_ICE_NOT_HPP_INCLUDED

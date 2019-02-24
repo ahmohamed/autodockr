@@ -28,7 +28,7 @@ namespace std
 }
 #endif
 
-namespace boost
+namespace vinaboost
 {
     typedef long once_flag;
 
@@ -115,9 +115,9 @@ namespace boost
         // just skip through:
         long const function_complete_flag_value=0xc15730e2;
 
-        if(::boost::detail::interlocked_read_acquire(&flag)!=function_complete_flag_value)
+        if(::vinaboost::detail::interlocked_read_acquire(&flag)!=function_complete_flag_value)
         {
-            void* const mutex_handle(::boost::detail::create_once_mutex(&flag));
+            void* const mutex_handle(::vinaboost::detail::create_once_mutex(&flag));
             BOOST_ASSERT(mutex_handle);
             detail::win32::handle_manager const closer(mutex_handle);
             detail::win32_mutex_scoped_lock const lock(mutex_handle);

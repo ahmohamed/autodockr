@@ -20,7 +20,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/type_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 #ifndef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 
@@ -32,11 +32,11 @@ BOOST_TT_AUX_TYPE_TRAIT_PARTIAL_SPEC1_1(typename T,remove_pointer,T* const volat
 
 #elif !BOOST_WORKAROUND(BOOST_MSVC,<=1300)
 
-BOOST_TT_AUX_TYPE_TRAIT_DEF1(remove_pointer,T,typename boost::detail::remove_pointer_impl<T>::type)
+BOOST_TT_AUX_TYPE_TRAIT_DEF1(remove_pointer,T,typename vinaboost::detail::remove_pointer_impl<T>::type)
 
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/type_trait_undef.hpp>
 

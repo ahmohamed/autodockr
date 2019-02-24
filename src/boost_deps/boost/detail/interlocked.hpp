@@ -94,7 +94,7 @@ extern "C" void* __cdecl _InterlockedExchangePointer( void* volatile *, void* );
 
 #elif defined( WIN32 ) || defined( _WIN32 ) || defined( __WIN32__ ) || defined( __CYGWIN__ )
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -108,13 +108,13 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedExchangeAdd( long vol
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
-# define BOOST_INTERLOCKED_INCREMENT ::boost::detail::InterlockedIncrement
-# define BOOST_INTERLOCKED_DECREMENT ::boost::detail::InterlockedDecrement
-# define BOOST_INTERLOCKED_COMPARE_EXCHANGE ::boost::detail::InterlockedCompareExchange
-# define BOOST_INTERLOCKED_EXCHANGE ::boost::detail::InterlockedExchange
-# define BOOST_INTERLOCKED_EXCHANGE_ADD ::boost::detail::InterlockedExchangeAdd
+# define BOOST_INTERLOCKED_INCREMENT ::vinaboost::detail::InterlockedIncrement
+# define BOOST_INTERLOCKED_DECREMENT ::vinaboost::detail::InterlockedDecrement
+# define BOOST_INTERLOCKED_COMPARE_EXCHANGE ::vinaboost::detail::InterlockedCompareExchange
+# define BOOST_INTERLOCKED_EXCHANGE ::vinaboost::detail::InterlockedExchange
+# define BOOST_INTERLOCKED_EXCHANGE_ADD ::vinaboost::detail::InterlockedExchangeAdd
 
 # define BOOST_INTERLOCKED_COMPARE_EXCHANGE_POINTER(dest,exchange,compare) \
     ((void*)BOOST_INTERLOCKED_COMPARE_EXCHANGE((long volatile*)(dest),(long)(exchange),(long)(compare)))

@@ -72,26 +72,26 @@
 
 #if !BOOST_WORKAROUND(__BORLANDC__, < 0x5A0)
 #  define BOOST_FUNCTION_ENABLE_IF_NOT_INTEGRAL(Functor,Type)              \
-      typename ::boost::enable_if_c<(::boost::type_traits::ice_not<          \
-                            (::boost::is_integral<Functor>::value)>::value), \
+      typename ::vinaboost::enable_if_c<(::vinaboost::type_traits::ice_not<          \
+                            (::vinaboost::is_integral<Functor>::value)>::value), \
                            Type>::type
 #else
 // BCC doesn't recognize this depends on a template argument and complains
 // about the use of 'typename'
 #  define BOOST_FUNCTION_ENABLE_IF_NOT_INTEGRAL(Functor,Type)     \
-      ::boost::enable_if_c<(::boost::type_traits::ice_not<          \
-                   (::boost::is_integral<Functor>::value)>::value), \
+      ::vinaboost::enable_if_c<(::vinaboost::type_traits::ice_not<          \
+                   (::vinaboost::is_integral<Functor>::value)>::value), \
                        Type>::type
 #endif
 
-namespace boost {
+namespace vinaboost {
   namespace detail {
     namespace function {
       class X;
 
       /**
        * A buffer used to store small function objects in
-       * boost::function. It is a union containing function pointers,
+       * vinaboost::function. It is a union containing function pointers,
        * object pointers, and a structure that resembles a bound
        * member function pointer.
        */
@@ -241,7 +241,7 @@ namespace boost {
       };
 
       /**
-       * Determine if boost::function can use the small-object
+       * Determine if vinaboost::function can use the small-object
        * optimization with the function object type F.
        */
       template<typename F>
@@ -602,7 +602,7 @@ namespace boost {
 
       /**
        * Stores the "manager" portion of the vtable for a
-       * boost::function object.
+       * vinaboost::function object.
        */
       struct vtable_base
       {
@@ -725,13 +725,13 @@ public: // should be protected, but GCC 2.95.3 will fail to allow access
 };
 
 /**
- * The bad_function_call exception class is thrown when a boost::function
+ * The bad_function_call exception class is thrown when a vinaboost::function
  * object is invoked
  */
 class bad_function_call : public std::runtime_error
 {
 public:
-  bad_function_call() : std::runtime_error("call to empty boost::function") {}
+  bad_function_call() : std::runtime_error("call to empty vinaboost::function") {}
 };
 
 #ifndef BOOST_NO_SFINAE
@@ -761,7 +761,7 @@ inline bool operator!=(detail::function::useless_clear_type*,
 #endif
 
 #ifdef BOOST_NO_SFINAE
-// Comparisons between boost::function objects and arbitrary function objects
+// Comparisons between vinaboost::function objects and arbitrary function objects
 template<typename Functor>
   inline bool operator==(const function_base& f, Functor g)
   {
@@ -792,7 +792,7 @@ template<typename Functor>
 #else
 
 #  if !(defined(__GNUC__) && __GNUC__ == 3 && __GNUC_MINOR__ <= 3)
-// Comparisons between boost::function objects and arbitrary function
+// Comparisons between vinaboost::function objects and arbitrary function
 // objects. GCC 3.3 and before has an obnoxious bug that prevents this
 // from working.
 template<typename Functor>
@@ -890,7 +890,7 @@ namespace detail {
 #endif
   } // end namespace function
 } // end namespace detail
-} // end namespace boost
+} // end namespace vinaboost
 
 #undef BOOST_FUNCTION_ENABLE_IF_NOT_INTEGRAL
 #undef BOOST_FUNCTION_COMPARE_TYPE_ID

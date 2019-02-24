@@ -21,7 +21,7 @@
 #  include <windows.h>
 #endif
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -103,6 +103,6 @@ public:
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_SMART_PTR_DETAIL_LWM_WIN32_CS_HPP_INCLUDED

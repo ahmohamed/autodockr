@@ -20,7 +20,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     inline void call_once(void (*func)(),once_flag& flag)
     {

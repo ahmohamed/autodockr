@@ -16,7 +16,7 @@
 #include <boost/limits.hpp>  // for std::numeric_limits
 
 
-namespace boost
+namespace vinaboost
 {
 
 
@@ -67,10 +67,10 @@ template <  >
 
 #ifdef ULLONG_MAX
 template <  >
-    class integer_traits<  ::boost::long_long_type>;
+    class integer_traits<  ::vinaboost::long_long_type>;
 
 template <  >
-    class integer_traits<  ::boost::ulong_long_type >;
+    class integer_traits<  ::vinaboost::ulong_long_type >;
 #endif
 
 
@@ -146,7 +146,7 @@ template < unsigned long Value1, unsigned long Value2 >
     struct static_unsigned_max;
 
 
-}  // namespace boost
+}  // namespace vinaboost
 
 
 #endif  // BOOST_INTEGER_FWD_HPP

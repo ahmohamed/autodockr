@@ -35,15 +35,15 @@
 #if !defined( BOOST_EXCEPTION_DISABLE )
 # include <boost/exception/exception.hpp>
 # include <boost/current_function.hpp>
-# define BOOST_THROW_EXCEPTION(x) ::boost::throw_exception(::boost::enable_error_info(x) <<\
-    ::boost::throw_function(BOOST_CURRENT_FUNCTION) <<\
-    ::boost::throw_file(__FILE__) <<\
-    ::boost::throw_line((int)__LINE__))
+# define BOOST_THROW_EXCEPTION(x) ::vinaboost::throw_exception(::vinaboost::enable_error_info(x) <<\
+    ::vinaboost::throw_function(BOOST_CURRENT_FUNCTION) <<\
+    ::vinaboost::throw_file(__FILE__) <<\
+    ::vinaboost::throw_line((int)__LINE__))
 #else
-# define BOOST_THROW_EXCEPTION(x) ::boost::throw_exception(x)
+# define BOOST_THROW_EXCEPTION(x) ::vinaboost::throw_exception(x)
 #endif
 
-namespace boost
+namespace vinaboost
 {
 
 #ifdef BOOST_NO_EXCEPTIONS
@@ -69,6 +69,6 @@ template<class E> BOOST_ATTRIBUTE_NORETURN inline void throw_exception( E const 
 
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_THROW_EXCEPTION_HPP_INCLUDED

@@ -19,18 +19,18 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
 
     struct once_flag
     {
-        boost::uintmax_t epoch;
+        vinaboost::uintmax_t epoch;
     };
 
     namespace detail
     {
-        BOOST_THREAD_DECL boost::uintmax_t& get_once_per_thread_epoch();
-        BOOST_THREAD_DECL extern boost::uintmax_t once_global_epoch;
+        BOOST_THREAD_DECL vinaboost::uintmax_t& get_once_per_thread_epoch();
+        BOOST_THREAD_DECL extern vinaboost::uintmax_t once_global_epoch;
         BOOST_THREAD_DECL extern pthread_mutex_t once_epoch_mutex;
         BOOST_THREAD_DECL extern pthread_cond_t once_epoch_cv;
     }
@@ -44,10 +44,10 @@ namespace boost
     template<typename Function>
     void call_once(once_flag& flag,Function f)
     {
-        static boost::uintmax_t const uninitialized_flag=BOOST_ONCE_INITIAL_FLAG_VALUE;
-        static boost::uintmax_t const being_initialized=uninitialized_flag+1;
-        boost::uintmax_t const epoch=flag.epoch;
-        boost::uintmax_t& this_thread_epoch=detail::get_once_per_thread_epoch();
+        static vinaboost::uintmax_t const uninitialized_flag=BOOST_ONCE_INITIAL_FLAG_VALUE;
+        static vinaboost::uintmax_t const being_initialized=uninitialized_flag+1;
+        vinaboost::uintmax_t const epoch=flag.epoch;
+        vinaboost::uintmax_t& this_thread_epoch=detail::get_once_per_thread_epoch();
         
         if(epoch<this_thread_epoch)
         {

@@ -11,7 +11,7 @@
 
 #include <boost/config.hpp>
 
-namespace boost {
+namespace vinaboost {
 namespace type_traits {
 
 // Utility class which always "returns" false
@@ -23,6 +23,6 @@ struct false_result
     };
 };
 
-}} // namespace boost::type_traits
+}} // namespace vinaboost::type_traits
 
 #endif // BOOST_TT_DETAIL_FALSE_RESULT_HPP_INCLUDED

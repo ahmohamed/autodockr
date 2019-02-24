@@ -24,7 +24,7 @@
 #include<boost/token_functions.hpp>
 #include<utility>
 
-namespace boost
+namespace vinaboost
 {
   template <class TokenizerFunc, class Iterator, class Type>
   class token_iterator
@@ -123,6 +123,6 @@ namespace boost
         return ret_type(fun,begin,end);
     }
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif

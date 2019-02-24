@@ -10,11 +10,11 @@ SOURCES =
     convert winmain
     ;
 
-lib boost_program_options
+lib vinaboost_program_options
     :
     $(SOURCES).cpp
     :
     <link>shared:<define>BOOST_PROGRAM_OPTIONS_DYN_LINK=1 # tell source we're building dll's
     ;
 
-boost-install boost_program_options ;
+boost-install vinaboost_program_options ;

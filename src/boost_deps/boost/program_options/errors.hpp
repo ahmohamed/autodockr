@@ -15,7 +15,7 @@
 
 
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     /** Base class for all errors in the library. */
     class BOOST_PROGRAM_OPTIONS_DECL error : public std::logic_error {

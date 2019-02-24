@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
@@ -61,9 +61,9 @@ namespace boost
             
             void lock()
             {
-                BOOST_VERIFY(timed_lock(::boost::detail::get_system_time_sentinel()));
+                BOOST_VERIFY(timed_lock(::vinaboost::detail::get_system_time_sentinel()));
             }
-            bool timed_lock(::boost::system_time const& wait_until)
+            bool timed_lock(::vinaboost::system_time const& wait_until)
             {
                 if(!win32::interlocked_bit_test_and_set(&active_count,lock_flag_bit))
                 {
@@ -88,7 +88,7 @@ namespace boost
 
                     do
                     {
-                        if(win32::WaitForSingleObject(sem,::boost::detail::get_milliseconds_until(wait_until))!=0)
+                        if(win32::WaitForSingleObject(sem,::vinaboost::detail::get_milliseconds_until(wait_until))!=0)
                         {
                             BOOST_INTERLOCKED_DECREMENT(&active_count);
                             return false;
@@ -118,7 +118,7 @@ namespace boost
                 return timed_lock(get_system_time()+timeout);
             }
 
-            bool timed_lock(boost::xtime const& timeout)
+            bool timed_lock(vinaboost::xtime const& timeout)
             {
                 return timed_lock(system_time(timeout));
             }
@@ -139,7 +139,7 @@ namespace boost
         private:
             void* get_event()
             {
-                void* current_event=::boost::detail::interlocked_read_acquire(&event);
+                void* current_event=::vinaboost::detail::interlocked_read_acquire(&event);
                 
                 if(!current_event)
                 {

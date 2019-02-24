@@ -29,7 +29,7 @@
 #   pragma warning(disable: 4121) // alignment is sensitive to packing
 #endif
 
-namespace boost {
+namespace vinaboost {
 
 #ifndef __BORLANDC__
 
@@ -43,7 +43,7 @@ typedef int (alignment_dummy::*member_function_ptr)();
 #ifdef BOOST_HAS_LONG_LONG
 #define BOOST_TT_ALIGNMENT_BASE_TYPES BOOST_PP_TUPLE_TO_LIST( \
         12, ( \
-        char, short, int, long,  ::boost::long_long_type, float, double, long double \
+        char, short, int, long,  ::vinaboost::long_long_type, float, double, long double \
         , void*, function_ptr, member_ptr, member_function_ptr))
 #else
 #define BOOST_TT_ALIGNMENT_BASE_TYPES BOOST_PP_TUPLE_TO_LIST( \
@@ -52,7 +52,7 @@ typedef int (alignment_dummy::*member_function_ptr)();
         , void*, function_ptr, member_ptr, member_function_ptr))
 #endif
 
-#define BOOST_TT_HAS_ONE_T(D,Data,T) boost::detail::has_one_T< T >
+#define BOOST_TT_HAS_ONE_T(D,Data,T) vinaboost::detail::has_one_T< T >
 
 #define BOOST_TT_ALIGNMENT_STRUCT_TYPES                         \
         BOOST_PP_LIST_TRANSFORM(BOOST_TT_HAS_ONE_T,             \
@@ -167,21 +167,21 @@ struct is_aligned
 };
 
 #ifdef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::max_align,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<1> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<2> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<4> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<8> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<10> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<16> ,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::detail::lower_alignment<32> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::max_align,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<1> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<2> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<4> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<8> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<10> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<16> ,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::detail::lower_alignment<32> ,true)
 #endif
 
 } // namespace detail
 
 #ifndef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 template<std::size_t Align>
-struct is_pod< ::boost::detail::lower_alignment<Align> >
+struct is_pod< ::vinaboost::detail::lower_alignment<Align> >
 {
         BOOST_STATIC_CONSTANT(std::size_t, value = true);
 };
@@ -194,11 +194,11 @@ namespace detail{
 template <std::size_t Align>
 class type_with_alignment_imp
 {
-    typedef ::boost::detail::lower_alignment<Align> t1;
+    typedef ::vinaboost::detail::lower_alignment<Align> t1;
     typedef typename mpl::if_c<
-          ::boost::detail::is_aligned< ::boost::alignment_of<t1>::value,Align >::value
+          ::vinaboost::detail::is_aligned< ::vinaboost::alignment_of<t1>::value,Align >::value
         , t1
-        , ::boost::detail::max_align
+        , ::vinaboost::detail::max_align
         >::type align_t;
 
     BOOST_STATIC_CONSTANT(std::size_t, found = alignment_of<align_t>::value);
@@ -214,7 +214,7 @@ class type_with_alignment_imp
 
 template <std::size_t Align>
 class type_with_alignment 
-  : public ::boost::detail::type_with_alignment_imp<Align>
+  : public ::vinaboost::detail::type_with_alignment_imp<Align>
 {
 };
 
@@ -235,11 +235,11 @@ template<> class type_with_alignment<16> { public: typedef align::a16 type; };
 template<> class type_with_alignment<32> { public: typedef align::a32 type; };
 
 namespace detail {
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a2,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a4,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a8,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a16,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a32,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a2,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a4,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a8,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a16,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a32,true)
 }
 #endif
 #if (defined(BOOST_MSVC) || (defined(BOOST_INTEL) && defined(_MSC_VER))) && _MSC_VER >= 1300
@@ -286,7 +286,7 @@ struct __declspec(align(128)) a128 {
 template<> class type_with_alignment<8>  
 { 
    typedef mpl::if_c<
-      ::boost::alignment_of<detail::max_align>::value < 8,
+      ::vinaboost::alignment_of<detail::max_align>::value < 8,
       align::a8,
       detail::type_with_alignment_imp<8> >::type t1; 
 public: 
@@ -295,7 +295,7 @@ public:
 template<> class type_with_alignment<16> 
 { 
    typedef mpl::if_c<
-      ::boost::alignment_of<detail::max_align>::value < 16,
+      ::vinaboost::alignment_of<detail::max_align>::value < 16,
       align::a16,
       detail::type_with_alignment_imp<16> >::type t1; 
 public: 
@@ -304,7 +304,7 @@ public:
 template<> class type_with_alignment<32> 
 { 
    typedef mpl::if_c<
-      ::boost::alignment_of<detail::max_align>::value < 32,
+      ::vinaboost::alignment_of<detail::max_align>::value < 32,
       align::a32,
       detail::type_with_alignment_imp<32> >::type t1; 
 public: 
@@ -312,7 +312,7 @@ public:
 };
 template<> class type_with_alignment<64> {
    typedef mpl::if_c<
-      ::boost::alignment_of<detail::max_align>::value < 64,
+      ::vinaboost::alignment_of<detail::max_align>::value < 64,
       align::a64,
       detail::type_with_alignment_imp<64> >::type t1; 
 public: 
@@ -320,7 +320,7 @@ public:
 };
 template<> class type_with_alignment<128> {
    typedef mpl::if_c<
-      ::boost::alignment_of<detail::max_align>::value < 128,
+      ::vinaboost::alignment_of<detail::max_align>::value < 128,
       align::a128,
       detail::type_with_alignment_imp<128> >::type t1; 
 public: 
@@ -328,11 +328,11 @@ public:
 };
 
 namespace detail {
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a8,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a16,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a32,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a64,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a128,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a8,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a16,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a32,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a64,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a128,true)
 }
 #endif
 
@@ -355,13 +355,13 @@ struct a16{ long double s; };
 
 namespace detail {
 
-typedef ::boost::align::a16 max_align;
+typedef ::vinaboost::align::a16 max_align;
 
 //#if ! BOOST_WORKAROUND(__CODEGEARC__, BOOST_TESTED_AT(0x610))
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a2,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a4,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a8,true)
-BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::boost::align::a16,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a2,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a4,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a8,true)
+BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_pod,::vinaboost::align::a16,true)
 //#endif
 }
 
@@ -380,7 +380,7 @@ template <> struct type_with_alignment<16>{ typedef align::a16 type; };
 
 #endif
 
-} // namespace boost
+} // namespace vinaboost
 
 #ifdef BOOST_MSVC
 #   pragma warning(pop)

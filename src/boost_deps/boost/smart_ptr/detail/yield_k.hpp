@@ -48,7 +48,7 @@ extern "C" void _mm_pause();
 # include <windows.h>
 #endif
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -81,14 +81,14 @@ inline void yield( unsigned k )
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #elif defined( BOOST_HAS_PTHREADS )
 
 #include <sched.h>
 #include <time.h>
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -126,11 +126,11 @@ inline void yield( unsigned k )
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #else
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -142,7 +142,7 @@ inline void yield( unsigned )
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif
 

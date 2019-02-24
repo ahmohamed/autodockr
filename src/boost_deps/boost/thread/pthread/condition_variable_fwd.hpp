@@ -14,7 +14,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     class condition_variable
     {
@@ -46,7 +46,7 @@ namespace boost
             while(!pred()) wait(m);
         }
 
-        bool timed_wait(unique_lock<mutex>& m,boost::system_time const& wait_until);
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::system_time const& wait_until);
         bool timed_wait(unique_lock<mutex>& m,xtime const& wait_until)
         {
             return timed_wait(m,system_time(wait_until));
@@ -59,7 +59,7 @@ namespace boost
         }
 
         template<typename predicate_type>
-        bool timed_wait(unique_lock<mutex>& m,boost::system_time const& wait_until,predicate_type pred)
+        bool timed_wait(unique_lock<mutex>& m,vinaboost::system_time const& wait_until,predicate_type pred)
         {
             while (!pred())
             {

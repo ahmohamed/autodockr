@@ -19,7 +19,7 @@
 
 #include <cstddef>            // for std::ptrdiff_t
 
-namespace boost
+namespace vinaboost
 {
 
 // Debug hooks
@@ -56,16 +56,16 @@ public:
     explicit scoped_array( T * p = 0 ) : px( p ) // never throws
     {
 #if defined(BOOST_SP_ENABLE_DEBUG_HOOKS)
-        boost::sp_array_constructor_hook( px );
+        vinaboost::sp_array_constructor_hook( px );
 #endif
     }
 
     ~scoped_array() // never throws
     {
 #if defined(BOOST_SP_ENABLE_DEBUG_HOOKS)
-        boost::sp_array_destructor_hook( px );
+        vinaboost::sp_array_destructor_hook( px );
 #endif
-        boost::checked_array_delete( px );
+        vinaboost::checked_array_delete( px );
     }
 
     void reset(T * p = 0) // never throws
@@ -102,6 +102,6 @@ template<class T> inline void swap(scoped_array<T> & a, scoped_array<T> & b) // 
     a.swap(b);
 }
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif  // #ifndef BOOST_SMART_PTR_SCOPED_ARRAY_HPP_INCLUDED

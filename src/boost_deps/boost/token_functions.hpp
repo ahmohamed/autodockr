@@ -61,7 +61,7 @@ namespace std{
 }
 #endif
 
-namespace boost{
+namespace vinaboost{
 
   //===========================================================================
   // The escaped_list_separator class. Which is a model of TokenizerFunction
@@ -610,7 +610,7 @@ namespace boost{
   };
 
 
-} //namespace boost
+} //namespace vinaboost
 
 
 #endif 

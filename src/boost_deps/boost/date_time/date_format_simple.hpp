@@ -11,7 +11,7 @@
 
 #include "boost/date_time/parse_format_base.hpp"
 
-namespace boost {
+namespace vinaboost {
 namespace date_time {
 
 //! Class to provide simple basic formatting rules

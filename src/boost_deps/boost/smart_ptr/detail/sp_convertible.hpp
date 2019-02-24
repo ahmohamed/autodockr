@@ -31,7 +31,7 @@
 
 #if !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -69,7 +69,7 @@ template< class Y, class T > struct sp_enable_if_convertible: public sp_enable_i
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 

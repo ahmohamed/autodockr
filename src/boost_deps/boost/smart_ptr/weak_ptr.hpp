@@ -22,7 +22,7 @@
 # pragma warning(disable:4284) // odd return type for operator->
 #endif
 
-namespace boost
+namespace vinaboost
 {
 
 template<class T> class weak_ptr
@@ -154,7 +154,7 @@ public:
 
     shared_ptr<T> lock() const // never throws
     {
-        return shared_ptr<element_type>( *this, boost::detail::sp_nothrow_tag() );
+        return shared_ptr<element_type>( *this, vinaboost::detail::sp_nothrow_tag() );
     }
 
     long use_count() const // never throws
@@ -183,7 +183,7 @@ public:
         pn.swap(other.pn);
     }
 
-    void _internal_assign(T * px2, boost::detail::shared_count const & pn2)
+    void _internal_assign(T * px2, vinaboost::detail::shared_count const & pn2)
     {
         px = px2;
         pn = pn2;
@@ -207,7 +207,7 @@ private:
 #endif
 
     T * px;                       // contained pointer
-    boost::detail::weak_count pn; // reference counter
+    vinaboost::detail::weak_count pn; // reference counter
 
 };  // weak_ptr
 
@@ -221,7 +221,7 @@ template<class T> void swap(weak_ptr<T> & a, weak_ptr<T> & b)
     a.swap(b);
 }
 
-} // namespace boost
+} // namespace vinaboost
 
 #ifdef BOOST_MSVC
 # pragma warning(pop)

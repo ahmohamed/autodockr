@@ -12,16 +12,16 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
-        typedef ::boost::detail::basic_timed_mutex underlying_mutex;
+        typedef ::vinaboost::detail::basic_timed_mutex underlying_mutex;
     }
 
     class mutex:
-        boost::noncopyable,
-        public ::boost::detail::underlying_mutex
+        vinaboost::noncopyable,
+        public ::vinaboost::detail::underlying_mutex
     {
     public:
         mutex()
@@ -40,8 +40,8 @@ namespace boost
     typedef mutex try_mutex;
 
     class timed_mutex:
-        boost::noncopyable,
-        public ::boost::detail::basic_timed_mutex
+        vinaboost::noncopyable,
+        public ::vinaboost::detail::basic_timed_mutex
     {
     public:
         timed_mutex()

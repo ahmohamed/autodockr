@@ -27,7 +27,7 @@
 #include <boost/date_time/time.hpp>
 #include <boost/date_time/date_defs.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 namespace date_time {
 
@@ -39,19 +39,19 @@ namespace winapi {
 
         struct FILETIME
         {
-            boost::uint32_t dwLowDateTime;
-            boost::uint32_t dwHighDateTime;
+            vinaboost::uint32_t dwLowDateTime;
+            vinaboost::uint32_t dwHighDateTime;
         };
         struct SYSTEMTIME
         {
-            boost::uint16_t wYear;
-            boost::uint16_t wMonth;
-            boost::uint16_t wDayOfWeek;
-            boost::uint16_t wDay;
-            boost::uint16_t wHour;
-            boost::uint16_t wMinute;
-            boost::uint16_t wSecond;
-            boost::uint16_t wMilliseconds;
+            vinaboost::uint16_t wYear;
+            vinaboost::uint16_t wMonth;
+            vinaboost::uint16_t wDayOfWeek;
+            vinaboost::uint16_t wDay;
+            vinaboost::uint16_t wHour;
+            vinaboost::uint16_t wMinute;
+            vinaboost::uint16_t wSecond;
+            vinaboost::uint16_t wMilliseconds;
         };
 
         __declspec(dllimport) void __stdcall GetSystemTimeAsFileTime(FILETIME* lpFileTime);
@@ -89,10 +89,10 @@ namespace winapi {
      *
      * \note The function is templated on the FILETIME type, so that
      *       it can be used with both native FILETIME and the ad-hoc
-     *       boost::date_time::winapi::file_time type.
+     *       vinaboost::date_time::winapi::file_time type.
      */
     template< typename FileTimeT >
-    inline boost::uint64_t file_time_to_microseconds(FileTimeT const& ft)
+    inline vinaboost::uint64_t file_time_to_microseconds(FileTimeT const& ft)
     {
         /* shift is difference between 1970-Jan-01 & 1601-Jan-01
         * in 100-nanosecond intervals */
@@ -119,7 +119,7 @@ namespace winapi {
  *
  * \note The function is templated on the FILETIME type, so that
  *       it can be used with both native FILETIME and the ad-hoc
- *       boost::date_time::winapi::file_time type.
+ *       vinaboost::date_time::winapi::file_time type.
  */
 template< typename TimeT, typename FileTimeT >
 inline
@@ -163,7 +163,7 @@ TimeT time_from_ftime(const FileTimeT& ft)
     return TimeT(d, time_duration_type(hours, minutes, seconds, sub_sec));
 }
 
-}} // boost::date_time
+}} // vinaboost::date_time
 
 #endif // BOOST_HAS_FTIME
 

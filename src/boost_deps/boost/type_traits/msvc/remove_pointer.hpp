@@ -8,7 +8,7 @@
 #include <boost/type_traits/msvc/typeof.hpp>
 #include <boost/type_traits/is_pointer.hpp>
 
-namespace boost {
+namespace vinaboost {
     namespace detail {
         template<int IsPointer>
         struct remove_pointer_impl_typeof {
@@ -33,10 +33,10 @@ namespace boost {
     template<typename T>
     struct remove_pointer {
         typedef typename detail::remove_pointer_impl_typeof<
-            boost::is_pointer<T>::value
+            vinaboost::is_pointer<T>::value
         >::template inner<T,remove_pointer<T> >::type type;
         BOOST_MPL_AUX_LAMBDA_SUPPORT(1,remove_pointer,T)
     };
-} //namespace boost
+} //namespace vinaboost
 
 #endif //BOOST_TYPE_TRAITS_REMOVE_POINTER_HOLT_2004_0827

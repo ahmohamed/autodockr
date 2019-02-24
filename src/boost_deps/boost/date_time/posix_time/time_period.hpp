@@ -13,7 +13,7 @@
 #include "boost/date_time/posix_time/posix_time_duration.hpp"
 #include "boost/date_time/posix_time/ptime.hpp"
 
-namespace boost {
+namespace vinaboost {
 namespace posix_time {
 
   //! Time period type

@@ -10,7 +10,7 @@
 
 #include <iterator>
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     namespace detail {
         template<class charT, class Iterator>

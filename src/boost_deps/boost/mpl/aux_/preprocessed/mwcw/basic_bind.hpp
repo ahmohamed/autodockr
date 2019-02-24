@@ -10,7 +10,7 @@
 // Preprocessed version of "boost/mpl/aux_/basic_bind.hpp" header
 // -- DO NOT modify by hand!
 
-namespace boost { namespace mpl {
+namespace vinaboost { namespace mpl {
 
 namespace aux {
 
