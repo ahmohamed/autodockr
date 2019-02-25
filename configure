@@ -1,12 +1,12 @@
 #! /bin/sh
 
-echo "Installing boost libs..."
+echo "*** Installing boost libs..."
 cd src
 sh ./build_boost.sh
 cd ..
 
 
-echo "Copying boost libs to inst directory..."
+echo "*** Copying boost libs to inst directory..."
 mkdir -p inst/libs
 cp src/boost_deps/boost_build/lib/* inst/libs
 
