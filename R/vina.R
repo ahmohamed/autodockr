@@ -3,8 +3,7 @@
 #'
 #' This is an R interface to allow calling Autodock Vina from whithin R. The package compile Vina
 #' and its dependencies upon installation.
-#'
-#' @rawNamespace useDynLib(libvinaboost_system); useDynLib(libvinaboost_serialization); useDynLib(libvinaboost_thread); useDynLib(libvinaboost_filesystem); useDynLib(libvinaboost_program_options); useDynLib(libvinaboost_date_time); useDynLib(autodockr)
+#' 
 #' @author Ahmed Mohamed \email{mohamed@@kuicr.kyoto-u.ac.jp}
 #' @name autodockr-package
 #' @aliases autodockr
@@ -27,7 +26,12 @@ NULL
 		ignore.case=TRUE,
 		full.names=TRUE
 	)
+
+	# boost_system lib has to be loaded first. Other libs link to it.
+	libs = c(libs[grep("_system\\.", libs)], libs[-grep("_system\\.", libs)])
+
 	lapply(libs, dyn.load)
+	library.dynam("autodockr", package="autodockr", lib.loc=NULL)
 }
 
 #' Run Autodock Vina
