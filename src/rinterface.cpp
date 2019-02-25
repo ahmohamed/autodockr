@@ -1,3 +1,4 @@
+#include <iostream>
 #include <R.h>
 #include <Rmath.h>
 #include <Rdefines.h>
@@ -6,7 +7,7 @@
 #include "vina/main/vina_error.h"
 #include <string>
 #include <boost/optional.hpp>
-#include <iostream>
+
 
 #ifdef __cplusplus
 extern "C" {
