@@ -9,3 +9,8 @@ cd ..
 echo "Copying boost libs to inst directory..."
 mkdir -p inst/libs
 cp src/boost_deps/boost_build/lib/*.so* inst/libs
+
+if ! test -z `command -v install_name_tool`;	then
+	echo "*** Linking boost_filesystem lib..."
+	install_name_tool -change "libvinaboost_system.dylib" "@loader_path/libvinaboost_system.dylib" inst/libs/libvinaboost_filesystem.dylib
+fi;
