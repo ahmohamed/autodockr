@@ -41,7 +41,7 @@ struct interacting_pair {
 
 typedef std::vector<interacting_pair> interacting_pairs;
 
-typedef std::pair<std::string, boost::optional<sz> > parsed_line;
+typedef std::pair<std::string, vinaboost::optional<sz> > parsed_line;
 typedef std::vector<parsed_line> context;
 
 struct ligand : public flexible_body, atom_range {

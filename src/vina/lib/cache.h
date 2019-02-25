@@ -50,7 +50,7 @@ private:
 	atom_type::t atu;
 	std::vector<grid> grids;
 
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void save(Archive& ar, const unsigned version) const;
 	template<class Archive>

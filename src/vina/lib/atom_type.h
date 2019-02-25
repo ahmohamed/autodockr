@@ -65,7 +65,7 @@ struct atom_type {
 		return covalent_radius() + x.covalent_radius();
 	}
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive> 
 	void serialize(Archive& ar, const unsigned version) {
 		ar & el;

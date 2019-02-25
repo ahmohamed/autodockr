@@ -32,23 +32,23 @@ struct file_error {
 	file_error(const path& name_, bool in_) : name(name_), in(in_) {}
 };
 
-struct ifile : public boost::filesystem::ifstream { // never use ifstream pointer to destroy ifile - no virtual destructors, possibly
-	ifile(const path& name) : boost::filesystem::ifstream(name) {
+struct ifile : public vinaboost::filesystem::ifstream { // never use ifstream pointer to destroy ifile - no virtual destructors, possibly
+	ifile(const path& name) : vinaboost::filesystem::ifstream(name) {
 		if(!(*this))
 			throw file_error(name, true);
 	}
-	ifile(const path& name, std::ios_base::openmode mode) : boost::filesystem::ifstream(name, mode) {
+	ifile(const path& name, std::ios_base::openmode mode) : vinaboost::filesystem::ifstream(name, mode) {
 		if(!(*this))
 			throw file_error(name, true);
 	}
 };
 
-struct ofile : public boost::filesystem::ofstream { // never use ofstream pointer to destroy ofile - no virtual destructors, possibly
-	ofile(const path& name) : boost::filesystem::ofstream(name) {
+struct ofile : public vinaboost::filesystem::ofstream { // never use ofstream pointer to destroy ofile - no virtual destructors, possibly
+	ofile(const path& name) : vinaboost::filesystem::ofstream(name) {
 		if(!(*this))
 			throw file_error(name, false);
 	}
-	ofile(const path& name, std::ios_base::openmode mode) : boost::filesystem::ofstream(name, mode) {
+	ofile(const path& name, std::ios_base::openmode mode) : vinaboost::filesystem::ofstream(name, mode) {
 		if(!(*this))
 			throw file_error(name, false);
 	}

@@ -63,7 +63,7 @@ fl szv_grid::average_num_possibilities() const {
 }
 
 const szv& szv_grid::possibilities(const vec& coords) const {
-	boost::array<sz, 3> index;
+	vinaboost::array<sz, 3> index;
 	VINA_FOR_IN(i, index) {
 		assert(coords[i] + epsilon_fl >= m_init[i]);
 		assert(coords[i] <= m_init[i] + m_range[i] + epsilon_fl);

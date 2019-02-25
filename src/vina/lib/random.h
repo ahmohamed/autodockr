@@ -26,7 +26,7 @@
 #include <boost/random.hpp>
 #include "common.h"
 
-typedef boost::mt19937 rng;
+typedef vinaboost::mt19937 rng;
 
 fl random_fl(fl a, fl b, rng& generator); // expects a < b, returns rand in [a, b]
 fl random_normal(fl mean, fl sigma, rng& generator); // expects sigma >= 0

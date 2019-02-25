@@ -75,7 +75,7 @@ private:
 	unsigned num_bonded_heavy_atoms(const model& m, const atom_index& i) const; // FIXME? - could be static, but I don't feel like declaring function friends
 	unsigned atom_rotors(const model& m, const atom_index& i) const; // the number of rotatable bonds to heavy ligand atoms
 
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & num_tors;
@@ -96,7 +96,7 @@ struct conf_independent : public term {
 template<typename T>
 struct term_set {
 	std::vector<bool> enabled;
-	boost::ptr_vector<T> fun; // FIXME? const T?
+	vinaboost::ptr_vector<T> fun; // FIXME? const T?
 	void add(unsigned e, T* f) { // FIXME? const T* ?
 		enabled.push_back(e > 0);
 		fun.push_back(f);
@@ -141,7 +141,7 @@ struct factors {
 	sz num_weights() const { return (e.size() > i.size()) ? e.size() : i.size(); }
 	fl eval(const flv& weights, bool include_internal) const;
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & e;

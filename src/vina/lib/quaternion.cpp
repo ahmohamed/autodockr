@@ -23,7 +23,7 @@
 #include "quaternion.h"
 
 bool quaternion_is_normalized(const qt& q) { // not in the interface, used in assertions
-	return eq(quaternion_norm_sqr(q), 1) && eq(boost::math::abs(q), 1);
+	return eq(quaternion_norm_sqr(q), 1) && eq(vinaboost::math::abs(q), 1);
 }
 
 
@@ -117,7 +117,7 @@ qt random_orientation(rng& generator) {
 		 random_normal(0, 1, generator), 
 		 random_normal(0, 1, generator), 
 		 random_normal(0, 1, generator));
-	fl nrm = boost::math::abs(q);
+	fl nrm = vinaboost::math::abs(q);
 	if(nrm > epsilon_fl) {
 		q /= nrm;
 		assert(quaternion_is_normalized(q));

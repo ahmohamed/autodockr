@@ -12,7 +12,7 @@
 extern "C" {
 #endif
   void vina(char** rigid_name, char** flex_name, char** ligand_name, char** out_name) {
-    boost::optional<std::string> rigid_name_opt, flex_name_opt, out_name_opt;
+    vinaboost::optional<std::string> rigid_name_opt, flex_name_opt, out_name_opt;
 
     Rprintf("ligand %s \n", ligand_name[0]);
 

@@ -39,7 +39,7 @@ T convert_substring(const std::string& str, sz i, sz j) { // indexes are 1-based
 
 	T tmp;
 	try {
-		tmp = boost::lexical_cast<T>(str.substr(i-1, j-i+1));
+		tmp = vinaboost::lexical_cast<T>(str.substr(i-1, j-i+1));
 	}
 	catch(...) {
 		throw bad_conversion();

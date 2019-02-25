@@ -122,7 +122,7 @@ struct vec {
 	}
 	sz size() const { return 3; }
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive> 
 	void serialize(Archive& ar, const unsigned version) {
 		ar & data;
@@ -184,7 +184,7 @@ typedef std::pair<vec, vec> vecp;
 typedef std::vector<fl> flv;
 typedef std::vector<pr> prv;
 typedef std::vector<sz> szv;
-typedef boost::filesystem::path path;
+typedef vinaboost::filesystem::path path;
 
 struct internal_error {
 	std::string file;

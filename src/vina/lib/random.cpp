@@ -27,8 +27,8 @@
 
 fl random_fl(fl a, fl b, rng& generator) { // expects a < b, returns rand in [a, b]
 	assert(a < b); // BOOST also asserts a < b
-	typedef boost::uniform_real<fl> distr;
-	boost::variate_generator<rng&, distr> r(generator, distr(a, b));
+	typedef vinaboost::uniform_real<fl> distr;
+	vinaboost::variate_generator<rng&, distr> r(generator, distr(a, b));
 	fl tmp = r();
 	assert(tmp >= a);
 	assert(tmp <= b);
@@ -37,15 +37,15 @@ fl random_fl(fl a, fl b, rng& generator) { // expects a < b, returns rand in [a,
 
 fl random_normal(fl mean, fl sigma, rng& generator) { // expects sigma >= 0
 	assert(sigma >= 0); // BOOST asserts this as well
-	typedef boost::normal_distribution<fl> distr;
-	boost::variate_generator<rng&, distr> r(generator, distr(mean, sigma));
+	typedef vinaboost::normal_distribution<fl> distr;
+	vinaboost::variate_generator<rng&, distr> r(generator, distr(mean, sigma));
 	return r();
 }
 
 int random_int(int a, int b, rng& generator) { // expects a <= b, returns rand in [a, b]
 	assert(a <= b); // BOOST asserts this as well
-	typedef boost::uniform_int<int> distr;
-	boost::variate_generator<rng&, distr> r(generator, distr(a, b));
+	typedef vinaboost::uniform_int<int> distr;
+	vinaboost::variate_generator<rng&, distr> r(generator, distr(a, b));
 	int tmp = r();
 	assert(tmp >= a);
 	assert(tmp <= b);
