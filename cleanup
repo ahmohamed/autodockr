@@ -7,6 +7,8 @@ rm -rf boost_deps/stage
 rm boost_deps/bjam
 rm boost_deps/project-config.jam*
 rm boost_deps/bootstrap.log
+rm -rf boost_deps/tools/jam/src/bin*
+rm -rf boost_deps/tools/jam/src/bootstrap*
 cd ..
 
 echo "removing boost libs from inst dir..."
