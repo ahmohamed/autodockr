@@ -13,6 +13,23 @@
 NULL
 
 
+.onLoad<- function(lib, pkg){
+	libs = paste(
+		"libvinaboost",
+		c("system", "filesystem", "thread", "program_options", "date_time", "serialization"),
+		collapse="|",
+		sep="_")
+	pattern=paste0("(", libs, ")\\.(so|dylib|dll)")
+
+	libs = list.files(
+		path=system.file("libs", package="autodockr"),
+		pattern=pattern,
+		ignore.case=TRUE,
+		full.names=TRUE
+	)
+	lapply(libs, dyn.load)
+}
+
 #' Run Autodock Vina
 #'
 #' @param ligand_name filepath for PDBQT file containing ligand
