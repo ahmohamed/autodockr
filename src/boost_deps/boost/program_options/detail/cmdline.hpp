@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-namespace boost { namespace program_options { namespace detail {
+namespace vinaboost { namespace program_options { namespace detail {
 
     /** Command line parser class. Main requirements were:
         - Powerful enough to support all common uses.
@@ -54,7 +54,7 @@ namespace boost { namespace program_options { namespace detail {
     class BOOST_PROGRAM_OPTIONS_DECL cmdline {
     public:
 
-        typedef ::boost::program_options::command_line_style::style_t style_t;
+        typedef ::vinaboost::program_options::command_line_style::style_t style_t;
 
         typedef function1<std::pair<std::string, std::string>, 
                           const std::string&> 

@@ -30,7 +30,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 #ifndef BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 
@@ -67,10 +67,10 @@ struct is_same_impl
 #else // generic "no-partial-specialization" version
 
 template <typename T>
-::boost::type_traits::yes_type
+::vinaboost::type_traits::yes_type
 BOOST_TT_DECL is_same_tester(T*, T*);
 
-::boost::type_traits::no_type
+::vinaboost::type_traits::no_type
 BOOST_TT_DECL is_same_tester(...);
 
 template <typename T, typename U>
@@ -80,9 +80,9 @@ struct is_same_impl
    static U u;
 
    BOOST_STATIC_CONSTANT(bool, value =
-      (::boost::type_traits::ice_and<
+      (::vinaboost::type_traits::ice_and<
          (sizeof(type_traits::yes_type) == sizeof(detail::is_same_tester(&t,&u))),
-         (::boost::is_reference<T>::value == ::boost::is_reference<U>::value),
+         (::vinaboost::is_reference<T>::value == ::vinaboost::is_reference<U>::value),
          (sizeof(T) == sizeof(U))
         >::value));
 };
@@ -91,11 +91,11 @@ struct is_same_impl
 
 } // namespace detail
 
-BOOST_TT_AUX_BOOL_TRAIT_DEF2(is_same,T,U,(::boost::detail::is_same_impl<T,U>::value))
+BOOST_TT_AUX_BOOL_TRAIT_DEF2(is_same,T,U,(::vinaboost::detail::is_same_impl<T,U>::value))
 
 #endif // BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 

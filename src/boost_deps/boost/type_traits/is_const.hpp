@@ -42,7 +42,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 #if defined( __CODEGEARC__ )
 
@@ -52,9 +52,9 @@ BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,__is_const(T))
 
 //* is a type T  declared const - is_const<T>
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1400)
-   BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::boost::detail::cv_traits_imp<typename remove_bounds<T>::type*>::is_const)
+   BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::vinaboost::detail::cv_traits_imp<typename remove_bounds<T>::type*>::is_const)
 #else
-   BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::boost::detail::cv_traits_imp<T*>::is_const)
+   BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::vinaboost::detail::cv_traits_imp<T*>::is_const)
 #endif
 BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T&,false)
 
@@ -71,23 +71,23 @@ BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T& const volatile,fa
 #if defined(__GNUC__) && (__GNUC__ < 3)
 // special case for gcc where illegally cv-qualified reference types can be
 // generated in some corner cases:
-BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T const,!(::boost::is_reference<T>::value))
-BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T volatile const,!(::boost::is_reference<T>::value))
+BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T const,!(::vinaboost::is_reference<T>::value))
+BOOST_TT_AUX_BOOL_TRAIT_PARTIAL_SPEC1_1(typename T,is_const,T volatile const,!(::vinaboost::is_reference<T>::value))
 #endif
 
 #else
 
 namespace detail {
 
-using ::boost::type_traits::yes_type;
-using ::boost::type_traits::no_type;
+using ::vinaboost::type_traits::yes_type;
+using ::vinaboost::type_traits::no_type;
 
 yes_type is_const_tester(const volatile void*);
 no_type is_const_tester(volatile void *);
 
 template <bool is_ref, bool array>
 struct is_const_helper
-    : ::boost::type_traits::false_result
+    : ::vinaboost::type_traits::false_result
 {
 };
 
@@ -134,11 +134,11 @@ BOOST_TT_AUX_BOOL_TRAIT_IMPL_SPEC1(is_const,void const volatile,true)
 } // namespace detail
 
 //* is a type T  declared const - is_const<T>
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::boost::detail::is_const_impl<T>::value)
+BOOST_TT_AUX_BOOL_TRAIT_DEF1(is_const,T,::vinaboost::detail::is_const_impl<T>::value)
 
 #endif // BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 

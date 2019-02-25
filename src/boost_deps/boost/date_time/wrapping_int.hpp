@@ -10,7 +10,7 @@
  */
 
 
-namespace boost {
+namespace vinaboost {
 namespace date_time {
 
 //! A wrapping integer used to support time durations (WARNING: only instantiate with a signed type)

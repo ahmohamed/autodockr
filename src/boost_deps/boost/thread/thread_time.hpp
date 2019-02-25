@@ -11,20 +11,20 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
-    typedef boost::posix_time::ptime system_time;
+    typedef vinaboost::posix_time::ptime system_time;
     
     inline system_time get_system_time()
     {
-        return boost::date_time::microsec_clock<system_time>::universal_time();
+        return vinaboost::date_time::microsec_clock<system_time>::universal_time();
     }
 
     namespace detail
     {
         inline system_time get_system_time_sentinel()
         {
-            return system_time(boost::posix_time::pos_infin);
+            return system_time(vinaboost::posix_time::pos_infin);
         }
 
         inline unsigned long get_milliseconds_until(system_time const& target_time)

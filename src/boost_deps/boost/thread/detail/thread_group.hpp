@@ -16,7 +16,7 @@
 #pragma warning(disable:4251)
 #endif
 
-namespace boost
+namespace vinaboost
 {
     class thread_group:
         private noncopyable
@@ -35,7 +35,7 @@ namespace boost
         template<typename F>
         thread* create_thread(F threadfunc)
         {
-            boost::lock_guard<shared_mutex> guard(m);
+            vinaboost::lock_guard<shared_mutex> guard(m);
             std::auto_ptr<thread> new_thread(new thread(threadfunc));
             threads.push_back(new_thread.get());
             return new_thread.release();
@@ -45,14 +45,14 @@ namespace boost
         {
             if(thrd)
             {
-                boost::lock_guard<shared_mutex> guard(m);
+                vinaboost::lock_guard<shared_mutex> guard(m);
                 threads.push_back(thrd);
             }
         }
             
         void remove_thread(thread* thrd)
         {
-            boost::lock_guard<shared_mutex> guard(m);
+            vinaboost::lock_guard<shared_mutex> guard(m);
             std::list<thread*>::iterator const it=std::find(threads.begin(),threads.end(),thrd);
             if(it!=threads.end())
             {
@@ -62,7 +62,7 @@ namespace boost
         
         void join_all()
         {
-            boost::shared_lock<shared_mutex> guard(m);
+            vinaboost::shared_lock<shared_mutex> guard(m);
             
             for(std::list<thread*>::iterator it=threads.begin(),end=threads.end();
                 it!=end;
@@ -74,7 +74,7 @@ namespace boost
         
         void interrupt_all()
         {
-            boost::shared_lock<shared_mutex> guard(m);
+            vinaboost::shared_lock<shared_mutex> guard(m);
             
             for(std::list<thread*>::iterator it=threads.begin(),end=threads.end();
                 it!=end;
@@ -86,7 +86,7 @@ namespace boost
         
         size_t size() const
         {
-            boost::shared_lock<shared_mutex> guard(m);
+            vinaboost::shared_lock<shared_mutex> guard(m);
             return threads.size();
         }
         

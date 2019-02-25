@@ -19,7 +19,7 @@
 
 #include <pthread.h>
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -81,6 +81,6 @@ public:
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_SMART_PTR_DETAIL_LWM_PTHREADS_HPP_INCLUDED

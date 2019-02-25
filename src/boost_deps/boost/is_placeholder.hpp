@@ -18,7 +18,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 
 
-namespace boost
+namespace vinaboost
 {
 
 template< class T > struct is_placeholder
@@ -26,6 +26,6 @@ template< class T > struct is_placeholder
     enum _vt { value = 0 };
 };
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_IS_PLACEHOLDER_HPP_INCLUDED

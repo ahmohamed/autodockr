@@ -35,7 +35,7 @@ namespace std { using ::time_t; using ::time; using ::localtime;
 #include <time.h>
 #endif
 
-namespace boost {
+namespace vinaboost {
 namespace date_time {
   //! Provides a uniform interface to some 'ctime' functions
   /*! Provides a uniform interface to some ctime functions and 
@@ -59,7 +59,7 @@ namespace date_time {
         // localtime_r() not in namespace std???
         result = localtime_r(t, result);
         if (!result)
-          boost::throw_exception(std::runtime_error("could not convert calendar time to local time"));
+          vinaboost::throw_exception(std::runtime_error("could not convert calendar time to local time"));
         return result;
       }
       //! requires a pointer to a user created std::tm struct
@@ -69,7 +69,7 @@ namespace date_time {
         // gmtime_r() not in namespace std???
         result = gmtime_r(t, result);
         if (!result)
-          boost::throw_exception(std::runtime_error("could not convert calendar time to UTC time"));
+          vinaboost::throw_exception(std::runtime_error("could not convert calendar time to UTC time"));
         return result;
       }
 #else // BOOST_HAS_THREADS
@@ -84,7 +84,7 @@ namespace date_time {
       {
         result = std::localtime(t);
         if (!result)
-          boost::throw_exception(std::runtime_error("could not convert calendar time to local time"));
+          vinaboost::throw_exception(std::runtime_error("could not convert calendar time to local time"));
         return result;
       }
       //! requires a pointer to a user created std::tm struct
@@ -93,7 +93,7 @@ namespace date_time {
       {
         result = std::gmtime(t);
         if (!result)
-          boost::throw_exception(std::runtime_error("could not convert calendar time to UTC time"));
+          vinaboost::throw_exception(std::runtime_error("could not convert calendar time to UTC time"));
         return result;
       }
 #if (defined(_MSC_VER) && (_MSC_VER >= 1400))

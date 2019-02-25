@@ -37,7 +37,7 @@
 #include <functional>       // std::less
 #include <new>              // std::bad_alloc
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -88,7 +88,7 @@ public:
         }
         catch(...)
         {
-            boost::checked_delete( p );
+            vinaboost::checked_delete( p );
             throw;
         }
 
@@ -98,8 +98,8 @@ public:
 
         if( pi_ == 0 )
         {
-            boost::checked_delete( p );
-            boost::throw_exception( std::bad_alloc() );
+            vinaboost::checked_delete( p );
+            vinaboost::throw_exception( std::bad_alloc() );
         }
 
 #endif
@@ -136,7 +136,7 @@ public:
         if(pi_ == 0)
         {
             d(p); // delete p
-            boost::throw_exception(std::bad_alloc());
+            vinaboost::throw_exception(std::bad_alloc());
         }
 
 #endif
@@ -182,7 +182,7 @@ public:
         else
         {
             d( p );
-            boost::throw_exception( std::bad_alloc() );
+            vinaboost::throw_exception( std::bad_alloc() );
         }
 
 #endif
@@ -202,7 +202,7 @@ public:
 
         if( pi_ == 0 )
         {
-            boost::throw_exception(std::bad_alloc());
+            vinaboost::throw_exception(std::bad_alloc());
         }
 
 #endif
@@ -418,7 +418,7 @@ inline shared_count::shared_count( weak_count const & r ): pi_( r.pi_ )
 {
     if( pi_ == 0 || !pi_->add_ref_lock() )
     {
-        boost::throw_exception( boost::bad_weak_ptr() );
+        vinaboost::throw_exception( vinaboost::bad_weak_ptr() );
     }
 }
 
@@ -435,7 +435,7 @@ inline shared_count::shared_count( weak_count const & r, sp_nothrow_tag ): pi_( 
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #ifdef __BORLANDC__
 # pragma warn .8027     // Functions containing try are not expanded inline

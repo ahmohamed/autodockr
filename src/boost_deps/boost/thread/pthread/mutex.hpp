@@ -24,10 +24,10 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace boost
+namespace vinaboost
 {
     class mutex:
-        boost::noncopyable
+        vinaboost::noncopyable
     {
     private:
         pthread_mutex_t m;
@@ -75,7 +75,7 @@ namespace boost
     typedef mutex try_mutex;
 
     class timed_mutex:
-        boost::noncopyable
+        vinaboost::noncopyable
     {
     private:
         pthread_mutex_t m;
@@ -114,7 +114,7 @@ namespace boost
         {
             return timed_lock(get_system_time()+relative_time);
         }
-        bool timed_lock(boost::xtime const & absolute_time)
+        bool timed_lock(vinaboost::xtime const & absolute_time)
         {
             return timed_lock(system_time(absolute_time));
         }
@@ -153,7 +153,7 @@ namespace boost
 #else
         void lock()
         {
-            boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            vinaboost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             while(is_locked)
             {
                 BOOST_VERIFY(!pthread_cond_wait(&cond,&m));
@@ -163,14 +163,14 @@ namespace boost
 
         void unlock()
         {
-            boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            vinaboost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             is_locked=false;
             BOOST_VERIFY(!pthread_cond_signal(&cond));
         }
         
         bool try_lock()
         {
-            boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            vinaboost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked)
             {
                 return false;
@@ -182,7 +182,7 @@ namespace boost
         bool timed_lock(system_time const & abs_time)
         {
             struct timespec const timeout=detail::get_timespec(abs_time);
-            boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            vinaboost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             while(is_locked)
             {
                 int const cond_res=pthread_cond_timedwait(&cond,&m,&timeout);

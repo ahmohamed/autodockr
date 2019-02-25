@@ -26,7 +26,7 @@
 #include <iosfwd>
 
 /** Boost namespace */
-namespace boost { 
+namespace vinaboost { 
 /** Namespace for the library. */
 namespace program_options {
 

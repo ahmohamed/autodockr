@@ -42,8 +42,8 @@ fl grid::evaluate_aux(const vec& location, fl slope, fl v, vec* deriv) const { /
 	vec s  = elementwise_product(location - m_init, m_factor); 
 
 	vec miss(0, 0, 0);
-	boost::array<int, 3> region;
-	boost::array<sz, 3> a;
+	vinaboost::array<int, 3> region;
+	vinaboost::array<sz, 3> a;
 
 	VINA_FOR(i, 3) {
 		if(s[i] < 0) {
@@ -60,7 +60,7 @@ fl grid::evaluate_aux(const vec& location, fl slope, fl v, vec* deriv) const { /
 			s[i] = 1;
 		}
 		else {
-			region[i] = 0; // now that region is boost::array, it's not initialized
+			region[i] = 0; // now that region is vinaboost::array, it's not initialized
 			a[i] = sz(s[i]);
 			s[i] -= a[i];
 		}

@@ -23,7 +23,7 @@
 # include <bits/atomicity.h>
 #endif
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -67,6 +67,6 @@ private:
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_SMART_PTR_DETAIL_ATOMIC_COUNT_GCC_HPP_INCLUDED

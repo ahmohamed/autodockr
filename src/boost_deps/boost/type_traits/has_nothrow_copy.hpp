@@ -14,25 +14,25 @@
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 namespace detail{
 
 template <class T>
 struct has_nothrow_copy_imp{
    BOOST_STATIC_CONSTANT(bool, value = 
-      (::boost::type_traits::ice_or<
-         ::boost::has_trivial_copy<T>::value,
+      (::vinaboost::type_traits::ice_or<
+         ::vinaboost::has_trivial_copy<T>::value,
          BOOST_HAS_NOTHROW_COPY(T)
       >::value));
 };
 
 }
 
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_nothrow_copy,T,::boost::detail::has_nothrow_copy_imp<T>::value)
-BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_nothrow_copy_constructor,T,::boost::detail::has_nothrow_copy_imp<T>::value)
+BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_nothrow_copy,T,::vinaboost::detail::has_nothrow_copy_imp<T>::value)
+BOOST_TT_AUX_BOOL_TRAIT_DEF1(has_nothrow_copy_constructor,T,::vinaboost::detail::has_nothrow_copy_imp<T>::value)
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 

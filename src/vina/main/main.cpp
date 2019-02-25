@@ -45,10 +45,10 @@
 #include "coords.h" // add_to_output_container
 #include "vina_error.h"
 
-using boost::filesystem::path;
+using vinaboost::filesystem::path;
 
 path make_path(const std::string& str) {
-	return path(str, boost::filesystem::native);
+	return path(str, vinaboost::filesystem::native);
 }
 
 void doing(int verbosity, const std::string& str, tee& log) {
@@ -151,7 +151,7 @@ output_container remove_redundant(const output_container& in, fl min_rmsd) {
 	return tmp;
 }
 
-void do_search(model& m, const boost::optional<model>& ref, const scoring_function& sf, const precalculate& prec, const igrid& ig, const precalculate& prec_widened, const igrid& ig_widened, non_cache& nc, // nc.slope is changed
+void do_search(model& m, const vinaboost::optional<model>& ref, const scoring_function& sf, const precalculate& prec, const igrid& ig, const precalculate& prec_widened, const igrid& ig_widened, non_cache& nc, // nc.slope is changed
 			   const std::string& out_name,
 			   const vec& corner1, const vec& corner2,
 			   const parallel_mc& par, fl energy_range, sz num_modes,
@@ -274,7 +274,7 @@ void do_search(model& m, const boost::optional<model>& ref, const scoring_functi
 	}
 }
 
-void main_procedure(model& m, const boost::optional<model>& ref, // m is non-const (FIXME?)
+void main_procedure(model& m, const vinaboost::optional<model>& ref, // m is non-const (FIXME?)
 			     const std::string& out_name,
 				 bool score_only, bool local_only, bool randomize_only, bool no_cache,
 				 const grid_dims& gd, int exhaustiveness,
@@ -342,7 +342,7 @@ struct usage_error : public std::runtime_error {
 	usage_error(const std::string& message) : std::runtime_error(message) {}
 };
 
-model parse_bundle(const std::string& rigid_name, const boost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
+model parse_bundle(const std::string& rigid_name, const vinaboost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
 	model tmp = (flex_name_opt) ? parse_receptor_pdbqt(make_path(rigid_name), make_path(flex_name_opt.get()))
 		                        : parse_receptor_pdbqt(make_path(rigid_name));
 	VINA_FOR_IN(i, ligand_names)
@@ -358,17 +358,17 @@ model parse_bundle(const std::vector<std::string>& ligand_names) {
 	return tmp;
 }
 
-model parse_bundle(const boost::optional<std::string>& rigid_name_opt, const boost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
+model parse_bundle(const vinaboost::optional<std::string>& rigid_name_opt, const vinaboost::optional<std::string>& flex_name_opt, const std::vector<std::string>& ligand_names) {
 	if(rigid_name_opt)
 		return parse_bundle(rigid_name_opt.get(), flex_name_opt, ligand_names);
 	else
 		return parse_bundle(ligand_names);
 }
 
-int main_with_args(const boost::optional<std::string>& rigid_name_opt,
-	const boost::optional<std::string>& flex_name_opt,
+int main_with_args(const vinaboost::optional<std::string>& rigid_name_opt,
+	const vinaboost::optional<std::string>& flex_name_opt,
 	std::string ligand_name,
-	const boost::optional<std::string>& out_name_opt) {
+	const vinaboost::optional<std::string>& out_name_opt) {
 	fl center_x=109.00,
 		center_y=40.12,
 		center_z=46.50,
@@ -414,7 +414,7 @@ int main_with_args(const boost::optional<std::string>& rigid_name_opt,
 		}
 	}
 	if(cpu == 0) {
-		unsigned num_cpus = boost::thread::hardware_concurrency();
+		unsigned num_cpus = vinaboost::thread::hardware_concurrency();
 		if(verbosity > 1) {
 			if(num_cpus > 0)
 				log << "Detected " << num_cpus << " CPU" << ((num_cpus > 1) ? "s" : "") << '\n';
@@ -435,7 +435,7 @@ int main_with_args(const boost::optional<std::string>& rigid_name_opt,
 
 	model m       = parse_bundle(rigid_name_opt, flex_name_opt, std::vector<std::string>(1, ligand_name));
 	sz max_modes_sz = static_cast<sz>(num_modes);
-	boost::optional<model> ref;
+	vinaboost::optional<model> ref;
 	done(verbosity, log);
 
 	std::string out_name;
@@ -456,10 +456,10 @@ int main_with_args(const boost::optional<std::string>& rigid_name_opt,
 				weights,
 				cpu, seed, verbosity, max_modes_sz, energy_range, log);
 }
-int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
-	const boost::optional<std::string>& flex_name_opt,
+int vina_cpp(const vinaboost::optional<std::string>& rigid_name_opt,
+	const vinaboost::optional<std::string>& flex_name_opt,
 	std::string ligand_name,
-	const boost::optional<std::string>& out_name_opt)
+	const vinaboost::optional<std::string>& out_name_opt)
 {
 	try{
 		main_with_args(rigid_name_opt, flex_name_opt, ligand_name, out_name_opt);
@@ -468,7 +468,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 		throw vina_error("\n\nError: could not open \"" + e.name.native_file_string() + "\" for " + (e.in ? "reading" : "writing") + ".\n");
 
 	}
-	catch(boost::filesystem::filesystem_error& e) {
+	catch(vinaboost::filesystem::filesystem_error& e) {
 		throw vina_error(std::string("\n\nFile system error: ") + e.what() + '\n');
 	}
 	catch(usage_error& e) {
@@ -502,14 +502,14 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 // 	\n\
 // 	Thank you!\n";
 // 	try{
-// 		boost::optional<std::string> flex_name;
+// 		vinaboost::optional<std::string> flex_name;
 // 		main_with_args("../Target/human.pdbqt", "../Ligand/human_ligand.pdbqt", flex_name, "../Out/human.pdbqt_plasmo_ligand.vinaall.pdbqt");
 // 	}
 // 	catch(file_error& e) {
 // 		std::cerr << "\n\nError: could not open \"" << e.name.native_file_string() << "\" for " << (e.in ? "reading" : "writing") << ".\n";
 // 		return 1;
 // 	}
-// 	catch(boost::filesystem::filesystem_error& e) {
+// 	catch(vinaboost::filesystem::filesystem_error& e) {
 // 		std::cerr << "\n\nFile system error: " << e.what() << '\n';
 // 		return 1;
 // 	}
@@ -543,7 +543,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 // }
 
 // int main(int argc, char* argv[]) {
-// 	using namespace boost::program_options;
+// 	using namespace vinaboost::program_options;
 // 	const std::string version_string = "AutoDock Vina 1.1.2 (May 11, 2011)";
 // 	const std::string error_message = "\n\n\
 // Please contact the author, Dr. Oleg Trott <ot14@columbia.edu>, so\n\
@@ -617,7 +617,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 // 				vm);
 // 			notify(vm);
 // 		}
-// 		catch(boost::program_options::error& e) {
+// 		catch(vinaboost::program_options::error& e) {
 // 			std::cerr << "Command line parse error: " << e.what() << '\n' << "\nCorrect usage:\n" << desc_simple << '\n';
 // 			return 1;
 // 		}
@@ -708,7 +708,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 // 			}
 // 		}
 // 		if(vm.count("cpu") == 0) {
-// 			unsigned num_cpus = boost::thread::hardware_concurrency();
+// 			unsigned num_cpus = vinaboost::thread::hardware_concurrency();
 // 			if(verbosity > 1) {
 // 				if(num_cpus > 0)
 // 					log << "Detected " << num_cpus << " CPU" << ((num_cpus > 1) ? "s" : "") << '\n';
@@ -729,7 +729,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 //
 // 		model m       = parse_bundle(rigid_name_opt, flex_name_opt, std::vector<std::string>(1, ligand_name));
 //
-// 		boost::optional<model> ref;
+// 		vinaboost::optional<model> ref;
 // 		done(verbosity, log);
 //
 // 		main_procedure(m, ref,
@@ -743,7 +743,7 @@ int vina_cpp(const boost::optional<std::string>& rigid_name_opt,
 // 		std::cerr << "\n\nError: could not open \"" << e.name.native_file_string() << "\" for " << (e.in ? "reading" : "writing") << ".\n";
 // 		return 1;
 // 	}
-// 	catch(boost::filesystem::filesystem_error& e) {
+// 	catch(vinaboost::filesystem::filesystem_error& e) {
 // 		std::cerr << "\n\nFile system error: " << e.what() << '\n';
 // 		return 1;
 // 	}

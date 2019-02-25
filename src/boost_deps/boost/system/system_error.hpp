@@ -13,7 +13,7 @@
 #include <cassert>
 #include <boost/system/error_code.hpp>
 
-namespace boost
+namespace vinaboost
 {
   namespace system
   {
@@ -74,7 +74,7 @@ namespace boost
     }
 
   } // namespace system
-} // namespace boost
+} // namespace vinaboost
 
 #endif // BOOST_SYSTEM_ERROR_HPP
 

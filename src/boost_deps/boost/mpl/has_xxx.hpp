@@ -44,7 +44,7 @@
 #   include <boost/mpl/if.hpp>
 #   include <boost/mpl/bool.hpp>
 
-namespace boost { namespace mpl { namespace aux {
+namespace vinaboost { namespace mpl { namespace aux {
 
 struct has_xxx_tag;
 
@@ -84,26 +84,26 @@ struct msvc_is_incomplete<int>
 }}}
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF_(trait, name, default_) \
-template< typename T, typename name = ::boost::mpl::aux::has_xxx_tag > \
+template< typename T, typename name = ::vinaboost::mpl::aux::has_xxx_tag > \
 struct BOOST_PP_CAT(trait,_impl) : T \
 { \
-    static boost::mpl::aux::no_tag \
-    test(void(*)(::boost::mpl::aux::has_xxx_tag)); \
+    static vinaboost::mpl::aux::no_tag \
+    test(void(*)(::vinaboost::mpl::aux::has_xxx_tag)); \
     \
-    static boost::mpl::aux::yes_tag test(...); \
+    static vinaboost::mpl::aux::yes_tag test(...); \
     \
     BOOST_STATIC_CONSTANT(bool, value = \
           sizeof(test(static_cast<void(*)(name)>(0))) \
-            != sizeof(boost::mpl::aux::no_tag) \
+            != sizeof(vinaboost::mpl::aux::no_tag) \
         ); \
-    typedef boost::mpl::bool_<value> type; \
+    typedef vinaboost::mpl::bool_<value> type; \
 }; \
 \
-template< typename T, typename fallback_ = boost::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = vinaboost::mpl::bool_<default_> > \
 struct trait \
-    : boost::mpl::if_c< \
-          boost::mpl::aux::msvc_is_incomplete<T>::value \
-        , boost::mpl::bool_<false> \
+    : vinaboost::mpl::if_c< \
+          vinaboost::mpl::aux::msvc_is_incomplete<T>::value \
+        , vinaboost::mpl::bool_<false> \
         , BOOST_PP_CAT(trait,_impl)<T> \
         >::type \
 { \
@@ -129,7 +129,7 @@ BOOST_MPL_AUX_HAS_XXX_TRAIT_SPEC(trait, long double) \
 template<> struct trait<T> \
 { \
     BOOST_STATIC_CONSTANT(bool, value = false); \
-    typedef boost::mpl::bool_<false> type; \
+    typedef vinaboost::mpl::bool_<false> type; \
 }; \
 /**/
 
@@ -168,7 +168,7 @@ template< typename T, typename U = void > \
 struct BOOST_PP_CAT(trait,_impl_) \
 { \
     BOOST_STATIC_CONSTANT(bool, value = false); \
-    typedef boost::mpl::bool_<value> type; \
+    typedef vinaboost::mpl::bool_<value> type; \
 }; \
 \
 template< typename T > \
@@ -178,10 +178,10 @@ struct BOOST_PP_CAT(trait,_impl_)< \
     > \
 { \
     BOOST_STATIC_CONSTANT(bool, value = true); \
-    typedef boost::mpl::bool_<value> type; \
+    typedef vinaboost::mpl::bool_<value> type; \
 }; \
 \
-template< typename T, typename fallback_ = boost::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = vinaboost::mpl::bool_<default_> > \
 struct trait \
     : BOOST_PP_CAT(trait,_impl_)<T> \
 { \
@@ -202,18 +202,18 @@ struct trait_tester< T, true > \
     struct trait_tester_impl \
     { \
         template < class U > \
-        static int  resolve( boost::mpl::aux::type_wrapper<U> const volatile * \
-                           , boost::mpl::aux::type_wrapper<typename U::name >* = 0 ); \
+        static int  resolve( vinaboost::mpl::aux::type_wrapper<U> const volatile * \
+                           , vinaboost::mpl::aux::type_wrapper<typename U::name >* = 0 ); \
         static char resolve( ... ); \
     }; \
-    typedef boost::mpl::aux::type_wrapper<T> t_; \
+    typedef vinaboost::mpl::aux::type_wrapper<T> t_; \
     BOOST_STATIC_CONSTANT( bool, value = ( sizeof( trait_tester_impl::resolve( static_cast< t_ * >(0) ) ) == sizeof(int) ) ); \
 }; \
-template< typename T, typename fallback_ = boost::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = vinaboost::mpl::bool_<default_> > \
 struct trait           \
 {                      \
-    BOOST_STATIC_CONSTANT( bool, value = (trait_tester< T, boost::is_class< T >::value >::value) );     \
-    typedef boost::mpl::bool_< trait< T, fallback_ >::value > type; \
+    BOOST_STATIC_CONSTANT( bool, value = (trait_tester< T, vinaboost::is_class< T >::value >::value) );     \
+    typedef vinaboost::mpl::bool_< trait< T, fallback_ >::value > type; \
 };
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
@@ -226,26 +226,26 @@ struct trait           \
 #   else // other SFINAE-capable compilers
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
-template< typename T, typename fallback_ = boost::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = vinaboost::mpl::bool_<default_> > \
 struct trait \
 { \
     struct gcc_3_2_wknd \
     { \
         template< typename U > \
-        static boost::mpl::aux::yes_tag test( \
-              boost::mpl::aux::type_wrapper<U> const volatile* \
-            , boost::mpl::aux::type_wrapper<BOOST_MSVC_TYPENAME U::name>* = 0 \
+        static vinaboost::mpl::aux::yes_tag test( \
+              vinaboost::mpl::aux::type_wrapper<U> const volatile* \
+            , vinaboost::mpl::aux::type_wrapper<BOOST_MSVC_TYPENAME U::name>* = 0 \
             ); \
     \
-        static boost::mpl::aux::no_tag test(...); \
+        static vinaboost::mpl::aux::no_tag test(...); \
     }; \
     \
-    typedef boost::mpl::aux::type_wrapper<T> t_; \
+    typedef vinaboost::mpl::aux::type_wrapper<T> t_; \
     BOOST_STATIC_CONSTANT(bool, value = \
           sizeof(gcc_3_2_wknd::test(static_cast<t_*>(0))) \
-            == sizeof(boost::mpl::aux::yes_tag) \
+            == sizeof(vinaboost::mpl::aux::yes_tag) \
         ); \
-    typedef boost::mpl::bool_<value> type; \
+    typedef vinaboost::mpl::bool_<value> type; \
 }; \
 /**/
 
@@ -257,7 +257,7 @@ struct trait \
 // placeholder implementation
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
-template< typename T, typename fallback_ = boost::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = vinaboost::mpl::bool_<default_> > \
 struct trait \
 { \
     BOOST_STATIC_CONSTANT(bool, value = fallback_::value); \

@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     /** Option found in input source.
         Contains a key and a value. The key, in turn, can be a string (name of

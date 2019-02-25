@@ -28,7 +28,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/type_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 namespace detail {
 
@@ -36,28 +36,28 @@ template <class T>
 struct make_unsigned_imp
 {
    BOOST_STATIC_ASSERT(
-      (::boost::type_traits::ice_or< ::boost::is_integral<T>::value, ::boost::is_enum<T>::value>::value));
+      (::vinaboost::type_traits::ice_or< ::vinaboost::is_integral<T>::value, ::vinaboost::is_enum<T>::value>::value));
 #if !BOOST_WORKAROUND(BOOST_MSVC, <=1300)
    BOOST_STATIC_ASSERT(
-      (::boost::type_traits::ice_not< ::boost::is_same<
+      (::vinaboost::type_traits::ice_not< ::vinaboost::is_same<
          typename remove_cv<T>::type, bool>::value>::value));
 #endif
 
    typedef typename remove_cv<T>::type t_no_cv;
    typedef typename mpl::if_c<
-      (::boost::type_traits::ice_and< 
-         ::boost::is_unsigned<T>::value,
-         ::boost::is_integral<T>::value,
-         ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, char>::value>::value,
-         ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, wchar_t>::value>::value,
-         ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, bool>::value>::value >::value),
+      (::vinaboost::type_traits::ice_and< 
+         ::vinaboost::is_unsigned<T>::value,
+         ::vinaboost::is_integral<T>::value,
+         ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, char>::value>::value,
+         ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, wchar_t>::value>::value,
+         ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, bool>::value>::value >::value),
       T,
       typename mpl::if_c<
-         (::boost::type_traits::ice_and< 
-            ::boost::is_integral<T>::value,
-            ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, char>::value>::value,
-            ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, wchar_t>::value>::value,
-            ::boost::type_traits::ice_not< ::boost::is_same<t_no_cv, bool>::value>::value>
+         (::vinaboost::type_traits::ice_and< 
+            ::vinaboost::is_integral<T>::value,
+            ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, char>::value>::value,
+            ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, wchar_t>::value>::value,
+            ::vinaboost::type_traits::ice_not< ::vinaboost::is_same<t_no_cv, bool>::value>::value>
          ::value),
          typename mpl::if_<
             is_same<t_no_cv, signed char>,
@@ -72,7 +72,7 @@ struct make_unsigned_imp
                      is_same<t_no_cv, long>,
                      unsigned long,
 #if defined(BOOST_HAS_LONG_LONG)
-                     boost::ulong_long_type
+                     vinaboost::ulong_long_type
 #elif defined(BOOST_HAS_MS_INT64)
                      unsigned __int64
 #else
@@ -96,7 +96,7 @@ struct make_unsigned_imp
                      sizeof(t_no_cv) == sizeof(unsigned long),
                      unsigned long,
 #if defined(BOOST_HAS_LONG_LONG)
-                     boost::ulong_long_type
+                     vinaboost::ulong_long_type
 #elif defined(BOOST_HAS_MS_INT64)
                      unsigned __int64
 #else
@@ -127,9 +127,9 @@ struct make_unsigned_imp
 
 } // namespace detail
 
-BOOST_TT_AUX_TYPE_TRAIT_DEF1(make_unsigned,T,typename boost::detail::make_unsigned_imp<T>::type)
+BOOST_TT_AUX_TYPE_TRAIT_DEF1(make_unsigned,T,typename vinaboost::detail::make_unsigned_imp<T>::type)
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/type_trait_undef.hpp>
 

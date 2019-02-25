@@ -8,7 +8,7 @@
 
 #include <boost/throw_exception.hpp>
 
-namespace boost { namespace program_options { 
+namespace vinaboost { namespace program_options { 
 
     extern BOOST_PROGRAM_OPTIONS_DECL std::string arg;
     
@@ -31,9 +31,9 @@ namespace boost { namespace program_options {
 
     template<class T, class charT>
     void 
-    typed_value<T, charT>::notify(const boost::any& value_store) const
+    typed_value<T, charT>::notify(const vinaboost::any& value_store) const
     {
-        const T* value = boost::any_cast<const T>(&value_store);
+        const T* value = vinaboost::any_cast<const T>(&value_store);
         if (m_store_to) {
             *m_store_to = *value;
         }
@@ -55,17 +55,17 @@ namespace boost { namespace program_options {
         {
             static std::basic_string<charT> empty;
             if (v.size() > 1)
-                boost::throw_exception(validation_error("multiple values not allowed"));
+                vinaboost::throw_exception(validation_error("multiple values not allowed"));
             else if (v.size() == 1)
                 return v.front();
             else if (!allow_empty)
-              boost::throw_exception(validation_error("at least one value required"));
+              vinaboost::throw_exception(validation_error("at least one value required"));
             return empty;
         }
 
         /* Throws multiple_occurrences if 'value' is not empty. */
         BOOST_PROGRAM_OPTIONS_DECL void 
-        check_first_occurrence(const boost::any& value);
+        check_first_occurrence(const vinaboost::any& value);
     }
 
     using namespace validators;
@@ -78,7 +78,7 @@ namespace boost { namespace program_options {
         partial template ordering, just like the last 'long/int' parameter.
     */
     template<class T, class charT>
-    void validate(boost::any& v, 
+    void validate(vinaboost::any& v, 
                   const std::vector< std::basic_string<charT> >& xs, 
                   T*, long)
     {
@@ -88,17 +88,17 @@ namespace boost { namespace program_options {
             v = any(lexical_cast<T>(s));
         }
         catch(const bad_lexical_cast&) {
-            boost::throw_exception(invalid_option_value(s));
+            vinaboost::throw_exception(invalid_option_value(s));
         }
     }
 
-    BOOST_PROGRAM_OPTIONS_DECL void validate(boost::any& v, 
+    BOOST_PROGRAM_OPTIONS_DECL void validate(vinaboost::any& v, 
                        const std::vector<std::string>& xs, 
                        bool*,
                        int);
 
 #if !defined(BOOST_NO_STD_WSTRING)
-    BOOST_PROGRAM_OPTIONS_DECL void validate(boost::any& v, 
+    BOOST_PROGRAM_OPTIONS_DECL void validate(vinaboost::any& v, 
                        const std::vector<std::wstring>& xs, 
                        bool*,
                        int);
@@ -110,13 +110,13 @@ namespace boost { namespace program_options {
           BOOST_WORKAROUND(__GNUC_MINOR__, < 3) ) || \
         ( BOOST_WORKAROUND(BOOST_MSVC, == 1310) ) \
       ) 
-    BOOST_PROGRAM_OPTIONS_DECL void validate(boost::any& v, 
+    BOOST_PROGRAM_OPTIONS_DECL void validate(vinaboost::any& v, 
                        const std::vector<std::string>& xs,
                        std::string*,
                        int);
 
 #if !defined(BOOST_NO_STD_WSTRING)
-    BOOST_PROGRAM_OPTIONS_DECL void validate(boost::any& v, 
+    BOOST_PROGRAM_OPTIONS_DECL void validate(vinaboost::any& v, 
                        const std::vector<std::wstring>& xs,
                        std::string*,
                        int);
@@ -126,15 +126,15 @@ namespace boost { namespace program_options {
     /** Validates sequences. Allows multiple values per option occurrence
        and multiple occurrences. */
     template<class T, class charT>
-    void validate(boost::any& v, 
+    void validate(vinaboost::any& v, 
                   const std::vector<std::basic_string<charT> >& s, 
                   std::vector<T>*,
                   int)
     {
         if (v.empty()) {
-            v = boost::any(std::vector<T>());
+            v = vinaboost::any(std::vector<T>());
         }
-        std::vector<T>* tv = boost::any_cast< std::vector<T> >(&v);
+        std::vector<T>* tv = vinaboost::any_cast< std::vector<T> >(&v);
         assert(NULL != tv);
         for (unsigned i = 0; i < s.size(); ++i)
         {
@@ -142,14 +142,14 @@ namespace boost { namespace program_options {
                 /* We call validate so that if user provided
                    a validator for class T, we use it even
                    when parsing vector<T>.  */
-                boost::any a;
+                vinaboost::any a;
                 std::vector<std::basic_string<charT> > v;
                 v.push_back(s[i]);
                 validate(a, v, (T*)0, 0);                
-                tv->push_back(boost::any_cast<T>(a));
+                tv->push_back(vinaboost::any_cast<T>(a));
             }
             catch(const bad_lexical_cast& /*e*/) {
-                boost::throw_exception(invalid_option_value(s[i]));
+                vinaboost::throw_exception(invalid_option_value(s[i]));
             }
         }
     }
@@ -157,7 +157,7 @@ namespace boost { namespace program_options {
     template<class T, class charT>
     void 
     typed_value<T, charT>::
-    xparse(boost::any& value_store, 
+    xparse(vinaboost::any& value_store, 
            const std::vector<std::basic_string<charT> >& new_tokens) const
     {
         // If no tokens were given, and the option accepts an implicit
@@ -174,7 +174,7 @@ namespace boost { namespace program_options {
     value()
     {
         // Explicit qualification is vc6 workaround.
-        return boost::program_options::value<T>(0);
+        return vinaboost::program_options::value<T>(0);
     }
 
     template<class T>

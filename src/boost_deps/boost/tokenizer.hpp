@@ -19,7 +19,7 @@
 
 #include <boost/token_iterator.hpp>
 
-namespace boost {
+namespace vinaboost {
 
   
   //===========================================================================
@@ -93,6 +93,6 @@ namespace boost {
   };
 
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif

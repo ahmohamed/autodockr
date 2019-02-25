@@ -8,7 +8,7 @@
 #include <boost/type_traits/msvc/typeof.hpp>
 #include <boost/type_traits/is_reference.hpp>
 
-namespace boost {
+namespace vinaboost {
     namespace detail {
         template<bool IsReference>
         struct remove_reference_impl_typeof {
@@ -33,10 +33,10 @@ namespace boost {
     template<typename T>
     struct remove_reference {
         typedef typename detail::remove_reference_impl_typeof<
-            boost::is_reference<T>::value
+            vinaboost::is_reference<T>::value
         >::template inner<T,remove_reference<T> >::type type;
         BOOST_MPL_AUX_LAMBDA_SUPPORT(1,remove_reference,T)
     };
-} //namespace boost
+} //namespace vinaboost
 
 #endif //BOOST_TYPE_TRAITS_MSVC_REMOVE_REFERENCE_HOLT_2004_0827

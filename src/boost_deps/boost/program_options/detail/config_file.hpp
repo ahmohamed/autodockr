@@ -31,7 +31,7 @@
 
 
 
-namespace boost { namespace program_options { namespace detail {
+namespace vinaboost { namespace program_options { namespace detail {
 
     /** Standalone parser for config files in ini-line format.
         The parser is a model of single-pass lvalue iterator, and

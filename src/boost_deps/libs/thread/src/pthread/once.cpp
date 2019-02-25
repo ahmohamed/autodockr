@@ -9,11 +9,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-namespace boost
+namespace vinaboost
 {
     namespace detail
     {
-        BOOST_THREAD_DECL boost::uintmax_t once_global_epoch=UINTMAX_C(~0);
+        BOOST_THREAD_DECL vinaboost::uintmax_t once_global_epoch=UINTMAX_C(~0);
         BOOST_THREAD_DECL pthread_mutex_t once_epoch_mutex=PTHREAD_MUTEX_INITIALIZER;
         BOOST_THREAD_DECL pthread_cond_t once_epoch_cv = PTHREAD_COND_INITIALIZER;
 
@@ -34,17 +34,17 @@ namespace boost
             
         }
         
-        boost::uintmax_t& get_once_per_thread_epoch()
+        vinaboost::uintmax_t& get_once_per_thread_epoch()
         {
             BOOST_VERIFY(!pthread_once(&epoch_tss_key_flag,create_epoch_tss_key));
             void* data=pthread_getspecific(epoch_tss_key);
             if(!data)
             {
-                data=malloc(sizeof(boost::uintmax_t));
+                data=malloc(sizeof(vinaboost::uintmax_t));
                 BOOST_VERIFY(!pthread_setspecific(epoch_tss_key,data));
-                *static_cast<boost::uintmax_t*>(data)=UINTMAX_C(~0);
+                *static_cast<vinaboost::uintmax_t*>(data)=UINTMAX_C(~0);
             }
-            return *static_cast<boost::uintmax_t*>(data);
+            return *static_cast<vinaboost::uintmax_t*>(data);
         }
     }
     

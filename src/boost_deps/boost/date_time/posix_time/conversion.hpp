@@ -16,7 +16,7 @@
 #include <boost/date_time/time_resolution_traits.hpp> // absolute_value
 #include <boost/date_time/gregorian/conversion.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 namespace posix_time {
 
@@ -31,9 +31,9 @@ namespace posix_time {
 
   //! Convert a time to a tm structure truncating any fractional seconds 
   inline
-  std::tm to_tm(const boost::posix_time::ptime& t) {
-    std::tm timetm = boost::gregorian::to_tm(t.date());
-    boost::posix_time::time_duration td = t.time_of_day();
+  std::tm to_tm(const vinaboost::posix_time::ptime& t) {
+    std::tm timetm = vinaboost::gregorian::to_tm(t.date());
+    vinaboost::posix_time::time_duration td = t.time_of_day();
     timetm.tm_hour = td.hours(); 
     timetm.tm_min = td.minutes(); 
     timetm.tm_sec = td.seconds();
@@ -42,7 +42,7 @@ namespace posix_time {
   }
   //! Convert a time_duration to a tm structure truncating any fractional seconds and zeroing fields for date components 
   inline
-  std::tm to_tm(const boost::posix_time::time_duration& td) {
+  std::tm to_tm(const vinaboost::posix_time::time_duration& td) {
     std::tm timetm = {};
     timetm.tm_hour = date_time::absolute_value(td.hours());
     timetm.tm_min = date_time::absolute_value(td.minutes());
@@ -54,7 +54,7 @@ namespace posix_time {
   //! Convert a tm struct to a ptime ignoring is_dst flag
   inline
   ptime ptime_from_tm(const std::tm& timetm) {
-    boost::gregorian::date d = boost::gregorian::date_from_tm(timetm);
+    vinaboost::gregorian::date d = vinaboost::gregorian::date_from_tm(timetm);
     return ptime(d, time_duration(timetm.tm_hour, timetm.tm_min, timetm.tm_sec));
   }
 
@@ -72,18 +72,18 @@ namespace posix_time {
    *
    * \note The function is templated on the FILETIME type, so that
    *       it can be used with both native FILETIME and the ad-hoc
-   *       boost::date_time::winapi::file_time type.
+   *       vinaboost::date_time::winapi::file_time type.
    */
   template< typename TimeT, typename FileTimeT >
   inline
   TimeT from_ftime(const FileTimeT& ft)
   {
-    return boost::date_time::time_from_ftime<TimeT>(ft);
+    return vinaboost::date_time::time_from_ftime<TimeT>(ft);
   }
 
 #endif // BOOST_HAS_FTIME
 
-} } //namespace boost::posix_time
+} } //namespace vinaboost::posix_time
 
 
 

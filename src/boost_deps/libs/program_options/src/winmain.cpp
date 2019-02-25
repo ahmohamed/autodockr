@@ -8,7 +8,7 @@
 #include <cctype>
 
 #ifdef _WIN32
-namespace boost { namespace program_options {
+namespace vinaboost { namespace program_options {
 
     using namespace std;
 

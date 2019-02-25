@@ -43,7 +43,7 @@ extern "C" void _ReadWriteBarrier();
 
 //
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -70,7 +70,7 @@ public:
     {
         for( unsigned k = 0; !try_lock(); ++k )
         {
-            boost::detail::yield( k );
+            vinaboost::detail::yield( k );
         }
     }
 
@@ -106,7 +106,7 @@ public:
 };
 
 } // namespace detail
-} // namespace boost
+} // namespace vinaboost
 
 #define BOOST_DETAIL_SPINLOCK_INIT {0}
 

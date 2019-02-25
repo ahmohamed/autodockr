@@ -14,7 +14,7 @@
 // should be the last #include
 #include <boost/type_traits/detail/bool_trait_def.hpp>
 
-namespace boost {
+namespace vinaboost {
 
 //* is a type T void - is_void<T>
 #if defined( __CODEGEARC__ )
@@ -31,7 +31,7 @@ BOOST_TT_AUX_BOOL_TRAIT_SPEC1(is_void,void const volatile,true)
 
 #endif  // non-CodeGear implementation
 
-} // namespace boost
+} // namespace vinaboost
 
 #include <boost/type_traits/detail/bool_trait_undef.hpp>
 

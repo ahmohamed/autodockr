@@ -26,13 +26,13 @@
 	// for some reason, binary archive gives four huge warnings in VC2008
 	#include <boost/archive/binary_oarchive.hpp>
 	#include <boost/archive/binary_iarchive.hpp>
-	typedef boost::archive::binary_iarchive iarchive;
-	typedef boost::archive::binary_oarchive oarchive;
+	typedef vinaboost::archive::binary_iarchive iarchive;
+	typedef vinaboost::archive::binary_oarchive oarchive;
 #else // use text cache
 	#include <boost/archive/text_oarchive.hpp>
 	#include <boost/archive/text_iarchive.hpp>
-	typedef boost::archive::text_iarchive iarchive;
-	typedef boost::archive::text_oarchive oarchive;
+	typedef vinaboost::archive::text_iarchive iarchive;
+	typedef vinaboost::archive::text_oarchive oarchive;
 #endif 
 
 #include <boost/serialization/split_member.hpp>

@@ -19,7 +19,7 @@
 
 #if defined( BOOST_NO_TYPEID )
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -48,15 +48,15 @@ template<class T> struct sp_typeid_< T const volatile >: sp_typeid_< T >
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
-#define BOOST_SP_TYPEID(T) (&boost::detail::sp_typeid_<T>::v_)
+#define BOOST_SP_TYPEID(T) (&vinaboost::detail::sp_typeid_<T>::v_)
 
 #else
 
 #include <typeinfo>
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -74,7 +74,7 @@ typedef std::type_info sp_typeinfo;
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #define BOOST_SP_TYPEID(T) typeid(T)
 

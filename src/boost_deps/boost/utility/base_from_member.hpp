@@ -50,7 +50,7 @@
     /**/
 
 
-namespace boost
+namespace vinaboost
 {
 
 //  Base-from-member class template  -----------------------------------------//
@@ -75,9 +75,9 @@ protected:
     BOOST_PP_REPEAT_FROM_TO( 1, BOOST_PP_INC(BOOST_BASE_FROM_MEMBER_MAX_ARITY),
      BOOST_PRIVATE_CTR_DEF, _ )
 
-};  // boost::base_from_member
+};  // vinaboost::base_from_member
 
-}  // namespace boost
+}  // namespace vinaboost
 
 
 // Undo any private macros

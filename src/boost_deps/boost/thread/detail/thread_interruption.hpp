@@ -5,7 +5,7 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 // (C) Copyright 2007-9 Anthony Williams
 
-namespace boost
+namespace vinaboost
 {
     namespace this_thread
     {

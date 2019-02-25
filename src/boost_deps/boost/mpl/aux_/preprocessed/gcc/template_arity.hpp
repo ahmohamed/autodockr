@@ -9,7 +9,7 @@
 // Preprocessed version of "boost/mpl/aux_/template_arity.hpp" header
 // -- DO NOT modify by hand!
 
-namespace boost { namespace mpl { namespace aux {
+namespace vinaboost { namespace mpl { namespace aux {
 
 template< int N > struct arity_tag
 {

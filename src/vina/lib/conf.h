@@ -137,7 +137,7 @@ struct rigid_conf {
 		::print(orientation);
 	}
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & position;
@@ -174,7 +174,7 @@ struct ligand_conf {
 		printnl(torsions);
 	}
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & rigid;
@@ -204,7 +204,7 @@ struct residue_conf {
 		printnl(torsions);
 	}
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & torsions;
@@ -347,7 +347,7 @@ struct conf {
 			flex[i].print();
 	}
 private:
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned version) {
 		ar & ligands;
@@ -362,7 +362,7 @@ struct output_type {
 	output_type(const conf& c_, fl e_) : c(c_), e(e_) {}
 };
 
-typedef boost::ptr_vector<output_type> output_container;
+typedef vinaboost::ptr_vector<output_type> output_container;
 
 inline bool operator<(const output_type& a, const output_type& b) { // for sorting output_container
 	return a.e < b.e;

@@ -32,7 +32,7 @@ struct parallel_mc_task {
 	parallel_mc_task(const model& m_, int seed) : m(m_), generator(static_cast<rng::result_type>(seed)) {}
 };
 
-typedef boost::ptr_vector<parallel_mc_task> parallel_mc_task_container;
+typedef vinaboost::ptr_vector<parallel_mc_task> parallel_mc_task_container;
 
 struct parallel_mc_aux {
 	const monte_carlo* mc;

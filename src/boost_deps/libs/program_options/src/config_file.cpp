@@ -16,7 +16,7 @@
 #include <fstream>
 #include <cassert>
 
-namespace boost { namespace program_options { namespace detail {
+namespace vinaboost { namespace program_options { namespace detail {
 
     using namespace std;
 
@@ -57,7 +57,7 @@ namespace boost { namespace program_options { namespace detail {
                     bad_prefixes = true;
             }
             if (bad_prefixes)
-                boost::throw_exception(error("bad prefixes"));
+                vinaboost::throw_exception(error("bad prefixes"));
             allowed_prefixes.insert(s);
         }
     }
@@ -104,10 +104,10 @@ namespace boost { namespace program_options { namespace detail {
 
                     bool registered = allowed_option(name);
                     if (!registered && !m_allow_unregistered)
-                        boost::throw_exception(unknown_option(name));
+                        vinaboost::throw_exception(unknown_option(name));
                                         
                     if (value.empty())
-                        boost::throw_exception(invalid_syntax(s, "no value given"));
+                        vinaboost::throw_exception(invalid_syntax(s, "no value given"));
                     
                     found = true;
                     this->value().string_key = name;
@@ -117,7 +117,7 @@ namespace boost { namespace program_options { namespace detail {
                     break;
 
                 } else {
-                    boost::throw_exception(invalid_syntax(s, "unrecognized line"));
+                    vinaboost::throw_exception(invalid_syntax(s, "unrecognized line"));
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace boost { namespace program_options { namespace detail {
 }}}
 
 #if 0
-using boost::program_options::config_file;
+using vinaboost::program_options::config_file;
 
 #include <sstream>
 #include <cassert>

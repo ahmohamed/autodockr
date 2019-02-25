@@ -18,7 +18,7 @@
 #include <cstddef>           // std::ptrdiff_t
 #include <boost/config.hpp>
 
-namespace boost
+namespace vinaboost
 {
 # if defined(BOOST_NO_STD_ITERATOR) && !defined(BOOST_MSVC_STD_ITERATOR)
   template <class Category, class T,
@@ -52,8 +52,8 @@ namespace boost
 
   template <class Category, class T, class Distance = std::ptrdiff_t,
             class Pointer = T*, class Reference = T&>
-  struct iterator : boost::detail::iterator_base<Category, T, Distance, Pointer, Reference> {};
+  struct iterator : vinaboost::detail::iterator_base<Category, T, Distance, Pointer, Reference> {};
 # endif
-} // namespace boost
+} // namespace vinaboost
 
 #endif // BOOST_ITERATOR_HPP

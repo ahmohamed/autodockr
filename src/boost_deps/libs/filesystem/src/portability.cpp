@@ -16,7 +16,7 @@
 #include <boost/filesystem/config.hpp>
 #include <boost/filesystem/path.hpp>
 
-namespace fs = boost::filesystem;
+namespace fs = vinaboost::filesystem;
 
 #include <cstring> // SGI MIPSpro compilers need this
 
@@ -41,7 +41,7 @@ namespace
 
 } // unnamed namespace
 
-namespace boost
+namespace vinaboost
 {
   namespace filesystem
   {
@@ -112,4 +112,4 @@ namespace boost
     }
 
   } // namespace filesystem
-} // namespace boost
+} // namespace vinaboost

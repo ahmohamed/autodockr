@@ -12,7 +12,7 @@
 #include <string>
 #include <cassert>
 
-namespace boost {
+namespace vinaboost {
 
     class environment_iterator 
         : public eof_iterator<environment_iterator, 

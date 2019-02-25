@@ -35,7 +35,7 @@
 #endif
 
 
-namespace boost
+namespace vinaboost
 {
 
 //
@@ -290,7 +290,7 @@ template<class E, class T, class Y> std::basic_ostream<E, T> & operator<< (std::
 
 #endif // !defined(BOOST_NO_IOSTREAM)
 
-} // namespace boost
+} // namespace vinaboost
 
 #ifdef BOOST_MSVC
 # pragma warning(pop)

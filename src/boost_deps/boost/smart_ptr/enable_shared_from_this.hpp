@@ -18,7 +18,7 @@
 #include <boost/assert.hpp>
 #include <boost/config.hpp>
 
-namespace boost
+namespace vinaboost
 {
 
 template<class T> class enable_shared_from_this
@@ -74,6 +74,6 @@ private:
     mutable weak_ptr<T> weak_this_;
 };
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif  // #ifndef BOOST_SMART_PTR_ENABLE_SHARED_FROM_THIS_HPP_INCLUDED

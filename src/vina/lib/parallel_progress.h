@@ -30,17 +30,17 @@
 
 struct parallel_progress : public incrementable {
 	parallel_progress() : p(NULL) {}
-	void init(unsigned long n) { p = new boost::progress_display(n); }
+	void init(unsigned long n) { p = new vinaboost::progress_display(n); }
 	void operator++() {
 		if(p) {
-			boost::mutex::scoped_lock self_lk(self);
+			vinaboost::mutex::scoped_lock self_lk(self);
 			++(*p);
 		}
 	}
 	virtual ~parallel_progress() { delete p; }
 private:
-	boost::mutex self;
-	boost::progress_display* p;
+	vinaboost::mutex self;
+	vinaboost::progress_display* p;
 };
 
 #endif

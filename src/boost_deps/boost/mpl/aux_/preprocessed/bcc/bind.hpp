@@ -10,7 +10,7 @@
 // *Preprocessed* version of the main "bind.hpp" header
 // -- DO NOT modify by hand!
 
-namespace boost { namespace mpl {
+namespace vinaboost { namespace mpl {
 
 namespace aux {
 

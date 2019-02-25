@@ -52,7 +52,7 @@
     throw_exception(bad_lexical_cast(typeid(Source), typeid(Target)))
 #endif
 
-namespace boost
+namespace vinaboost
 {
     // exception used to indicate runtime lexical_cast failure
     class bad_lexical_cast : public std::bad_cast
@@ -371,8 +371,8 @@ namespace boost
         BOOST_LCAST_DEF(long)
         BOOST_LCAST_DEF(unsigned long)
 #if defined(BOOST_HAS_LONG_LONG)
-        BOOST_LCAST_DEF(boost::ulong_long_type)
-        BOOST_LCAST_DEF(boost::long_long_type )
+        BOOST_LCAST_DEF(vinaboost::ulong_long_type)
+        BOOST_LCAST_DEF(vinaboost::long_long_type )
 #elif defined(BOOST_HAS_MS_INT64)
         BOOST_LCAST_DEF(unsigned __int64)
         BOOST_LCAST_DEF(         __int64)
@@ -739,8 +739,8 @@ namespace boost
             bool operator<<(unsigned int);
             bool operator<<(unsigned long);
 #if defined(BOOST_HAS_LONG_LONG)
-            bool operator<<(boost::ulong_long_type);
-            bool operator<<(boost::long_long_type );
+            bool operator<<(vinaboost::ulong_long_type);
+            bool operator<<(vinaboost::long_long_type );
 #elif defined(BOOST_HAS_MS_INT64)
             bool operator<<(unsigned __int64);
             bool operator<<(         __int64);
@@ -884,7 +884,7 @@ namespace boost
 #if defined(BOOST_HAS_LONG_LONG)
         template<typename CharT, class Base, class Traits>
         inline bool lexical_stream_limited_src<CharT,Base,Traits>::operator<<(
-                boost::long_long_type n)
+                vinaboost::long_long_type n)
         {
             start = lcast_put_unsigned<Traits>(lcast_to_unsigned(n), finish);
             if(n < 0)
@@ -938,7 +938,7 @@ namespace boost
 #if defined(BOOST_HAS_LONG_LONG)
         template<typename CharT, class Base, class Traits>
         inline bool lexical_stream_limited_src<CharT,Base,Traits>::operator<<(
-                boost::ulong_long_type n)
+                vinaboost::ulong_long_type n)
         {
             start = lcast_put_unsigned<Traits>(n, finish);
             return true;
@@ -1128,20 +1128,20 @@ namespace boost
                 , typename CharT
                 >
         Target lexical_cast(
-            BOOST_DEDUCED_TYPENAME boost::call_traits<Source>::param_type arg,
+            BOOST_DEDUCED_TYPENAME vinaboost::call_traits<Source>::param_type arg,
             CharT* buf, std::size_t src_len)
         {
             typedef BOOST_DEDUCED_TYPENAME
                 deduce_char_traits<CharT,Target,Source>::type traits;
 
-            typedef BOOST_DEDUCED_TYPENAME boost::mpl::if_c<
+            typedef BOOST_DEDUCED_TYPENAME vinaboost::mpl::if_c<
                 lcast_streambuf_for_target<Target>::value ||
                 lcast_streambuf_for_source<Source>::value
               , std::basic_streambuf<CharT>
               , lexical_streambuf_fake
               >::type base;
 
-            BOOST_DEDUCED_TYPENAME boost::mpl::if_c<
+            BOOST_DEDUCED_TYPENAME vinaboost::mpl::if_c<
                 Unlimited
               , detail::lexical_stream<Target,Source,traits>
               , detail::lexical_stream_limited_src<CharT,base,traits>

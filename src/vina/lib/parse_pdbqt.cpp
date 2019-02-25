@@ -52,7 +52,7 @@ struct parsed_atom : public atom {
 };
 
 void add_context(context& c, std::string& str) {
-	c.push_back(parsed_line(str, boost::optional<sz>()));
+	c.push_back(parsed_line(str, vinaboost::optional<sz>()));
 }
 
 std::string omit_whitespace(const std::string& str, sz i, sz j) {
@@ -91,7 +91,7 @@ T checked_convert_substring(const std::string& str, sz i, sz j, const std::strin
 
 	const std::string substr = str.substr(i-1, j-i+1);
 	try {
-		return boost::lexical_cast<T>(substr);
+		return vinaboost::lexical_cast<T>(substr);
 	}
 	catch(...) {
 		throw atom_syntax_error(std::string("\"") + substr + "\" is not a valid " + dest_nature);
@@ -189,9 +189,9 @@ struct parsing_struct {
 	};
 
 	typedef node_t<parsing_struct> node;
-	boost::optional<sz> immobile_atom; // which of `atoms' is immobile, if any
-	boost::optional<atom_reference> axis_begin; // the index (in non_rigid_parsed::atoms) of the parent bound to immobile atom (if already known)
-	boost::optional<atom_reference> axis_end; // if immobile atom has been pushed into non_rigid_parsed::atoms, this is its index there
+	vinaboost::optional<sz> immobile_atom; // which of `atoms' is immobile, if any
+	vinaboost::optional<atom_reference> axis_begin; // the index (in non_rigid_parsed::atoms) of the parent bound to immobile atom (if already known)
+	vinaboost::optional<atom_reference> axis_end; // if immobile atom has been pushed into non_rigid_parsed::atoms, this is its index there
 	std::vector<node> atoms;
 
 	void add(const parsed_atom& a, const context& c) { 
@@ -340,10 +340,10 @@ void parse_pdbqt_branch_aux(std::istream& in, unsigned& count, const std::string
 			break;
 		}
 	if(i == p.atoms.size())
-		throw stream_parse_error(count, "No atom number " + boost::lexical_cast<std::string>(first) + " in this branch");
+		throw stream_parse_error(count, "No atom number " + vinaboost::lexical_cast<std::string>(first) + " in this branch");
 }
 
-void parse_pdbqt_aux(std::istream& in, unsigned& count, parsing_struct& p, context& c, boost::optional<unsigned>& torsdof, bool residue) {
+void parse_pdbqt_aux(std::istream& in, unsigned& count, parsing_struct& p, context& c, vinaboost::optional<unsigned>& torsdof, bool residue) {
 	parse_pdbqt_root(in, count, p, c);
 
 	std::string str;
@@ -365,7 +365,7 @@ void parse_pdbqt_aux(std::istream& in, unsigned& count, parsing_struct& p, conte
 	}
 }
 
-void add_bonds(non_rigid_parsed& nr, boost::optional<atom_reference> atm, const atom_range& r) {
+void add_bonds(non_rigid_parsed& nr, vinaboost::optional<atom_reference> atm, const atom_range& r) {
 	if(atm)
 		VINA_RANGE(i, r.begin, r.end) {
 			atom_reference& ar = atm.get();
@@ -376,7 +376,7 @@ void add_bonds(non_rigid_parsed& nr, boost::optional<atom_reference> atm, const 
 		}
 }
 
-void set_rotor(non_rigid_parsed& nr, boost::optional<atom_reference> axis_begin, boost::optional<atom_reference> axis_end) {
+void set_rotor(non_rigid_parsed& nr, vinaboost::optional<atom_reference> axis_begin, vinaboost::optional<atom_reference> axis_end) {
 	if(axis_begin && axis_end) {
 		atom_reference& r1 = axis_begin.get();
 		atom_reference& r2 = axis_end  .get();
@@ -393,7 +393,7 @@ void set_rotor(non_rigid_parsed& nr, boost::optional<atom_reference> axis_begin,
 }
 
 typedef std::pair<sz, sz> axis_numbers;
-typedef boost::optional<axis_numbers> axis_numbers_option;
+typedef vinaboost::optional<axis_numbers> axis_numbers_option;
 
 void nr_update_matrixes(non_rigid_parsed& nr) {
 	// atoms with indexes p.axis_begin and p.axis_end can not move relative to [b.node.begin, b.node.end)
@@ -472,7 +472,7 @@ void parse_pdbqt_ligand(const path& name, non_rigid_parsed& nr, context& c) {
 	ifile in(name);
 	unsigned count = 0;
 	parsing_struct p;
-	boost::optional<unsigned> torsdof;
+	vinaboost::optional<unsigned> torsdof;
 	try {
 		parse_pdbqt_aux(in, count, p, c, torsdof, false);
 		if(p.atoms.empty()) 
@@ -488,7 +488,7 @@ void parse_pdbqt_ligand(const path& name, non_rigid_parsed& nr, context& c) {
 }
 
 void parse_pdbqt_residue(std::istream& in, unsigned& count, parsing_struct& p, context& c) { 
-	boost::optional<unsigned> dummy;
+	vinaboost::optional<unsigned> dummy;
 	parse_pdbqt_aux(in, count, p, c, dummy, true);
 }
 
@@ -535,7 +535,7 @@ void parse_pdbqt_branch(std::istream& in, unsigned& count, parsing_struct& p, co
 			if(first != from || second != to) 
 				throw stream_parse_error(count, "Inconsistent branch numbers");
 			if(!p.immobile_atom) 
-				throw stream_parse_error(count, "Atom " + boost::lexical_cast<std::string>(to) + " has not been found in this branch");
+				throw stream_parse_error(count, "Atom " + vinaboost::lexical_cast<std::string>(to) + " has not been found in this branch");
 			return;
 		}
 		else if(starts_with(str, "ATOM  ") || starts_with(str, "HETATM")) {

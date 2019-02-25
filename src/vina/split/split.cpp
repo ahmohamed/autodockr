@@ -35,10 +35,10 @@
 #include "file.h"
 #include "parse_error.h"
 
-using boost::filesystem::path;
+using vinaboost::filesystem::path;
 
 path make_path(const std::string& str) {
-	return path(str, boost::filesystem::native);
+	return path(str, vinaboost::filesystem::native);
 }
 
 std::string default_prefix(const std::string& input_name, const std::string& add) {
@@ -131,7 +131,7 @@ void write_multimodel_pdbqt(const models& m, const std::string& ligand_prefix, c
 }
 
 int main(int argc, char* argv[]) {
-	using namespace boost::program_options;
+	using namespace vinaboost::program_options;
 	const bool advanced = false;
 	const std::string version_string = "AutoDock Vina PDBQT Split 1.1.2 (May 11, 2011)";
 
@@ -179,7 +179,7 @@ Thank you!\n";
 				vm);
 			notify(vm); 
 		}
-		catch(boost::program_options::error& e) {
+		catch(vinaboost::program_options::error& e) {
 			std::cerr << "Command line parse error: " << e.what() << '\n' << "\nCorrect usage:\n" << desc << '\n';
 			return 1;
 		}
@@ -211,7 +211,7 @@ Thank you!\n";
 		std::cerr << "\n\nError: could not open \"" << e.name.native_file_string() << "\" for " << (e.in ? "reading" : "writing") << ".\n";
 		return 1;
 	}
-	catch(boost::filesystem::filesystem_error& e) {
+	catch(vinaboost::filesystem::filesystem_error& e) {
 		std::cerr << "\n\nFile system error: " << e.what() << '\n';
 		return 1;
 	}

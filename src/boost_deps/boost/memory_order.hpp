@@ -9,7 +9,7 @@
 
 //  boost/memory_order.hpp
 //
-//  Defines enum boost::memory_order per the C++0x working draft
+//  Defines enum vinaboost::memory_order per the C++0x working draft
 //
 //  Copyright (c) 2008 Peter Dimov
 //
@@ -18,7 +18,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 
-namespace boost
+namespace vinaboost
 {
 
 enum memory_order
@@ -30,6 +30,6 @@ enum memory_order
     memory_order_seq_cst = 7  // acq_rel | 4
 };
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_MEMORY_ORDER_HPP_INCLUDED

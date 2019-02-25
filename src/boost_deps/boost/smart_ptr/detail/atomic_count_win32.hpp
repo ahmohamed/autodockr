@@ -19,7 +19,7 @@
 
 #include <boost/detail/interlocked.hpp>
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -58,6 +58,6 @@ private:
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_SMART_PTR_DETAIL_ATOMIC_COUNT_WIN32_HPP_INCLUDED

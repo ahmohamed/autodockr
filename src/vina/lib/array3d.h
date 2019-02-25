@@ -42,7 +42,7 @@ template<typename T>
 class array3d {
 	sz m_i, m_j, m_k;
 	std::vector<T> m_data;
-	friend class boost::serialization::access;
+	friend class vinaboost::serialization::access;
 	template<typename Archive>
 	void serialize(Archive& ar, const unsigned version) {
 		ar & m_i;

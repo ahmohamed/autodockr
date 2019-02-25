@@ -27,40 +27,40 @@ namespace
 
 #if defined(__BORLANDC__) || defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ < 400)
 
-static inline boost::arg<1> _1() { return boost::arg<1>(); }
-static inline boost::arg<2> _2() { return boost::arg<2>(); }
-static inline boost::arg<3> _3() { return boost::arg<3>(); }
-static inline boost::arg<4> _4() { return boost::arg<4>(); }
-static inline boost::arg<5> _5() { return boost::arg<5>(); }
-static inline boost::arg<6> _6() { return boost::arg<6>(); }
-static inline boost::arg<7> _7() { return boost::arg<7>(); }
-static inline boost::arg<8> _8() { return boost::arg<8>(); }
-static inline boost::arg<9> _9() { return boost::arg<9>(); }
+static inline vinaboost::arg<1> _1() { return vinaboost::arg<1>(); }
+static inline vinaboost::arg<2> _2() { return vinaboost::arg<2>(); }
+static inline vinaboost::arg<3> _3() { return vinaboost::arg<3>(); }
+static inline vinaboost::arg<4> _4() { return vinaboost::arg<4>(); }
+static inline vinaboost::arg<5> _5() { return vinaboost::arg<5>(); }
+static inline vinaboost::arg<6> _6() { return vinaboost::arg<6>(); }
+static inline vinaboost::arg<7> _7() { return vinaboost::arg<7>(); }
+static inline vinaboost::arg<8> _8() { return vinaboost::arg<8>(); }
+static inline vinaboost::arg<9> _9() { return vinaboost::arg<9>(); }
 
 #elif defined(BOOST_MSVC) || (defined(__DECCXX_VER) && __DECCXX_VER <= 60590031) || defined(__MWERKS__) || \
     defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ == 400)  
 
-static boost::arg<1> _1;
-static boost::arg<2> _2;
-static boost::arg<3> _3;
-static boost::arg<4> _4;
-static boost::arg<5> _5;
-static boost::arg<6> _6;
-static boost::arg<7> _7;
-static boost::arg<8> _8;
-static boost::arg<9> _9;
+static vinaboost::arg<1> _1;
+static vinaboost::arg<2> _2;
+static vinaboost::arg<3> _3;
+static vinaboost::arg<4> _4;
+static vinaboost::arg<5> _5;
+static vinaboost::arg<6> _6;
+static vinaboost::arg<7> _7;
+static vinaboost::arg<8> _8;
+static vinaboost::arg<9> _9;
 
 #else
 
-boost::arg<1> _1;
-boost::arg<2> _2;
-boost::arg<3> _3;
-boost::arg<4> _4;
-boost::arg<5> _5;
-boost::arg<6> _6;
-boost::arg<7> _7;
-boost::arg<8> _8;
-boost::arg<9> _9;
+vinaboost::arg<1> _1;
+vinaboost::arg<2> _2;
+vinaboost::arg<3> _3;
+vinaboost::arg<4> _4;
+vinaboost::arg<5> _5;
+vinaboost::arg<6> _6;
+vinaboost::arg<7> _7;
+vinaboost::arg<8> _8;
+vinaboost::arg<9> _9;
 
 #endif
 

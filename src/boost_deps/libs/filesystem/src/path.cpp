@@ -56,7 +56,7 @@ namespace
   bool locked(false);
 } // unnamed namespace
 
-namespace boost
+namespace vinaboost
 {
   namespace filesystem
   {
@@ -72,9 +72,9 @@ namespace boost
 
     void wpath_traits::imbue( const std::locale & new_loc )
     {
-      if ( locked ) boost::throw_exception(
+      if ( locked ) vinaboost::throw_exception(
         wfilesystem_error(
-          "boost::filesystem::wpath_traits::imbue() after lockdown",
+          "vinaboost::filesystem::wpath_traits::imbue() after lockdown",
           make_error_code( system::posix::not_supported ) ) );
       imbue( new_loc, std::nothrow );
     }
@@ -123,15 +123,15 @@ namespace boost
     {
       locked = true;
       std::size_t work_size( converter()->max_length() * (src.size()+1) );
-      boost::scoped_array<char> work( new char[ work_size ] );
+      vinaboost::scoped_array<char> work( new char[ work_size ] );
       std::mbstate_t state = std::mbstate_t();  // perhaps unneeded, but cuts bug reports
       const internal_string_type::value_type * from_next;
       external_string_type::value_type * to_next;
       if ( converter()->out( 
         state, src.c_str(), src.c_str()+src.size(), from_next, work.get(),
         work.get()+work_size, to_next ) != std::codecvt_base::ok )
-        boost::throw_exception( boost::filesystem::wfilesystem_error(
-          "boost::filesystem::wpath::to_external conversion error",
+        vinaboost::throw_exception( vinaboost::filesystem::wfilesystem_error(
+          "vinaboost::filesystem::wpath::to_external conversion error",
           ph, system::error_code( system::posix::invalid_argument, system::system_category ) ) );
       *to_next = '\0';
       return external_string_type( work.get() );
@@ -142,15 +142,15 @@ namespace boost
     {
       locked = true;
       std::size_t work_size( src.size()+1 );
-      boost::scoped_array<wchar_t> work( new wchar_t[ work_size ] );
+      vinaboost::scoped_array<wchar_t> work( new wchar_t[ work_size ] );
       std::mbstate_t state  = std::mbstate_t();  // perhaps unneeded, but cuts bug reports
       const external_string_type::value_type * from_next;
       internal_string_type::value_type * to_next;
       if ( converter()->in( 
         state, src.c_str(), src.c_str()+src.size(), from_next, work.get(),
         work.get()+work_size, to_next ) != std::codecvt_base::ok )
-        boost::throw_exception( boost::filesystem::wfilesystem_error(
-          "boost::filesystem::wpath::to_internal conversion error",
+        vinaboost::throw_exception( vinaboost::filesystem::wfilesystem_error(
+          "vinaboost::filesystem::wpath::to_internal conversion error",
           system::error_code( system::posix::invalid_argument, system::system_category ) ) );
       *to_next = L'\0';
       return internal_string_type( work.get() );
@@ -158,6 +158,6 @@ namespace boost
 # endif // BOOST_POSIX_API
 
   } // namespace filesystem
-} // namespace boost
+} // namespace vinaboost
 
 #endif // ifndef BOOST_FILESYSTEM_NARROW_ONLY

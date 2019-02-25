@@ -42,7 +42,7 @@
 #   include <boost/preprocessor/iterate.hpp>
 #   include <boost/preprocessor/cat.hpp>
 
-namespace boost { namespace mpl {
+namespace vinaboost { namespace mpl {
 
 // local macros, #undef-ined at the end of the header
 

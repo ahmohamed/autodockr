@@ -19,7 +19,7 @@
 //  http://www.boost.org/libs/utility/current_function.html
 //
 
-namespace boost
+namespace vinaboost
 {
 
 namespace detail
@@ -62,6 +62,6 @@ inline void current_function_helper()
 
 } // namespace detail
 
-} // namespace boost
+} // namespace vinaboost
 
 #endif // #ifndef BOOST_CURRENT_FUNCTION_HPP_INCLUDED
