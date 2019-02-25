@@ -4,7 +4,7 @@
 #' This is an R interface to allow calling Autodock Vina from whithin R. The package compile Vina
 #' and its dependencies upon installation.
 #'
-#' @rawNamespace useDynLib(libboost_system); useDynLib(libboost_thread); useDynLib(libboost_filesystem); useDynLib(libboost_program_options); useDynLib(libboost_date_time); useDynLib(autodockr)
+#' @rawNamespace useDynLib(libvinaboost_system); useDynLib(libvinaboost_serialization); useDynLib(libvinaboost_thread); useDynLib(libvinaboost_filesystem); useDynLib(libvinaboost_program_options); useDynLib(libvinaboost_date_time); useDynLib(autodockr)
 #' @author Ahmed Mohamed \email{mohamed@@kuicr.kyoto-u.ac.jp}
 #' @name autodockr-package
 #' @aliases autodockr
@@ -13,7 +13,7 @@
 NULL
 
 
-#' Run Autodock Vina 
+#' Run Autodock Vina
 #'
 #' @param ligand_name filepath for PDBQT file containing ligand
 #' @param rigid_name filepath for PDBQT file containing target
