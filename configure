@@ -8,7 +8,7 @@ cd ..
 
 echo "Copying boost libs to inst directory..."
 mkdir -p inst/libs
-cp src/boost_deps/boost_build/lib/*.so* inst/libs
+cp src/boost_deps/boost_build/lib/* inst/libs
 
 if ! test -z `command -v install_name_tool`;	then
 	echo "*** Linking boost_filesystem lib..."
