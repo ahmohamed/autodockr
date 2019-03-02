@@ -1,6 +1,6 @@
 # Sample .travis.yml for R projects
-warnings_are_errors: false
 language: r
+warnings_are_errors: false
 
 matrix:
   include:
