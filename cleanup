@@ -12,4 +12,4 @@ rm -rf boost_deps/tools/jam/src/bootstrap*
 cd ..
 
 echo "removing boost libs from inst dir..."
-rm -rf inst/libs
+rm -rf inst/boostlibs

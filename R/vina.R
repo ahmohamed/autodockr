@@ -21,7 +21,7 @@ NULL
 	pattern=paste0("(", libs, ")\\.(so|dylib|dll)")
 
 	libs = list.files(
-		path=system.file("libs", package="autodockr"),
+		path=system.file("boostlibs", package="autodockr"),
 		pattern=pattern,
 		ignore.case=TRUE,
 		full.names=TRUE

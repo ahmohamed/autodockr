@@ -1,16 +1,16 @@
-SOURCES = $(wildcard *.cpp vina/main/*.cpp vina/lib/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
-PKG_CXXFLAGS= -g -std=c++98 -fPIC -I boost_deps/boost_build/include -I ./vina/lib
+VINASOURCES = vina/lib/cache.cpp vina/lib/coords.cpp vina/lib/current_weights.cpp vina/lib/everything.cpp vina/lib/grid.cpp vina/lib/manifold.cpp vina/lib/model.cpp vina/lib/monte_carlo.cpp vina/lib/mutate.cpp vina/lib/my_pid.cpp vina/lib/naive_non_cache.cpp vina/lib/non_cache.cpp vina/lib/parallel_mc.cpp vina/lib/parallel_progress.cpp vina/lib/parse_pdbqt.cpp vina/lib/pdb.cpp vina/lib/quasi_newton.cpp vina/lib/quaternion.cpp vina/lib/random.cpp vina/lib/ssd.cpp vina/lib/szv_grid.cpp vina/lib/terms.cpp vina/lib/weighted_terms.cpp vina/main/main.cpp
+OBJECTS = $(VINASOURCES:.cpp=.o) rinterface.o
+PKG_CXXFLAGS=-std=c++98 -I boost_deps/boost_build/include -I ./vina/lib
 PKG_LIBS = -L./boost_deps/boost_build/lib $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lvinaboost_system -lvinaboost_serialization -lvinaboost_thread -lvinaboost_filesystem -lvinaboost_program_options
 
 
 final: $(SHLIB)
 	@if ! test -z `command -v install_name_tool`;	then\
 		echo "*** Linking libs for MAC OSX....";\
-		install_name_tool -change "libvinaboost_system.dylib" "@loader_path/libvinaboost_system.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_filesystem.dylib" "@loader_path/libvinaboost_filesystem.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_serialization.dylib" "@loader_path/libvinaboost_serialization.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_thread.dylib" "@loader_path/libvinaboost_thread.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_program_options.dylib" "@loader_path/libvinaboost_program_options.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_date_time.dylib" "@loader_path/libvinaboost_date_time.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_system.dylib" "@loader_path/../boostlibs//libvinaboost_system.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_filesystem.dylib" "@loader_path/../boostlibs//libvinaboost_filesystem.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_serialization.dylib" "@loader_path/../boostlibs//libvinaboost_serialization.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_thread.dylib" "@loader_path/../boostlibs//libvinaboost_thread.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_program_options.dylib" "@loader_path/../boostlibs//libvinaboost_program_options.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_date_time.dylib" "@loader_path/../boostlibs//libvinaboost_date_time.dylib" $(SHLIB);\
 	fi
