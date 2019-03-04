@@ -1,0 +1,24 @@
+# Sample .travis.yml for R projects
+language: r
+warnings_are_errors: false
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      r: 
+        - devel
+        - release      
+    - os: osx
+      r: release
+  allow_failures:
+    - os: osx
+
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
