@@ -365,7 +365,7 @@ model parse_bundle(const vinaboost::optional<std::string>& rigid_name_opt, const
 		return parse_bundle(ligand_names);
 }
 
-int main_with_args(const vinaboost::optional<std::string>& rigid_name_opt,
+void main_with_args(const vinaboost::optional<std::string>& rigid_name_opt,
 	const vinaboost::optional<std::string>& flex_name_opt,
 	std::string ligand_name,
 	const vinaboost::optional<std::string>& out_name_opt) {
@@ -456,7 +456,7 @@ int main_with_args(const vinaboost::optional<std::string>& rigid_name_opt,
 				weights,
 				cpu, seed, verbosity, max_modes_sz, energy_range, log);
 }
-int vina_cpp(const vinaboost::optional<std::string>& rigid_name_opt,
+void vina_cpp(const vinaboost::optional<std::string>& rigid_name_opt,
 	const vinaboost::optional<std::string>& flex_name_opt,
 	std::string ligand_name,
 	const vinaboost::optional<std::string>& out_name_opt)
