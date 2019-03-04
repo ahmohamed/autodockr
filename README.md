@@ -1,3 +1,4 @@
+[![Travis-CI Build Status](https://travis-ci.org/ahmohamed/autodockr.svg?branch=develop)](https://travis-ci.org/ahmohamed/autodockr)
 # Introduction
 This is an R interface to allow calling Autodock Vina from whithin R. The package compile Vina and its dependencies upon installation
 
