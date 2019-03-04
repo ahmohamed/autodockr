@@ -1,6 +1,6 @@
 SOURCES = $(wildcard *.cpp vina/main/*.cpp vina/lib/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
-PKG_CXXFLAGS= -g -std=c++98 -fPIC -I boost_deps/boost_build/include -I ./vina/lib
+PKG_CXXFLAGS=-I boost_deps/boost_build/include -I ./vina/lib
 PKG_LIBS = -L./boost_deps/boost_build/lib $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lvinaboost_system -lvinaboost_serialization -lvinaboost_thread -lvinaboost_filesystem -lvinaboost_program_options
 
 
