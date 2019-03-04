@@ -59,9 +59,9 @@ fl volume(const atom_type& a) {
 
 
 struct ad4_solvation : public distance_additive {
-	fl desolvation_sigma;
 	fl solvation_q;
 	bool charge_dependent;
+	fl desolvation_sigma;
 	ad4_solvation(fl desolvation_sigma_, fl solvation_q_, bool charge_dependent_, fl cutoff_) : distance_additive(cutoff_), solvation_q(solvation_q_), charge_dependent(charge_dependent_), desolvation_sigma(desolvation_sigma_) {
 		name = std::string("ad4_solvation(d-sigma=") + to_string(desolvation_sigma) + ", s/q=" + to_string(solvation_q) + ", q=" + to_string(charge_dependent) + ", c=" + to_string(cutoff) + ")";
 	}
