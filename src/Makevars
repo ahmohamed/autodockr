@@ -7,10 +7,10 @@ PKG_LIBS = -L./boost_deps/boost_build/lib $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -
 final: $(SHLIB)
 	@if ! test -z `command -v install_name_tool`;	then\
 		echo "*** Linking libs for MAC OSX....";\
-		install_name_tool -change "libvinaboost_system.dylib" "@loader_path/libvinaboost_system.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_filesystem.dylib" "@loader_path/libvinaboost_filesystem.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_serialization.dylib" "@loader_path/libvinaboost_serialization.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_thread.dylib" "@loader_path/libvinaboost_thread.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_program_options.dylib" "@loader_path/libvinaboost_program_options.dylib" $(SHLIB);\
-		install_name_tool -change "libvinaboost_date_time.dylib" "@loader_path/libvinaboost_date_time.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_system.dylib" "@loader_path/../boostlibs//libvinaboost_system.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_filesystem.dylib" "@loader_path/../boostlibs//libvinaboost_filesystem.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_serialization.dylib" "@loader_path/../boostlibs//libvinaboost_serialization.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_thread.dylib" "@loader_path/../boostlibs//libvinaboost_thread.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_program_options.dylib" "@loader_path/../boostlibs//libvinaboost_program_options.dylib" $(SHLIB);\
+		install_name_tool -change "libvinaboost_date_time.dylib" "@loader_path/../boostlibs//libvinaboost_date_time.dylib" $(SHLIB);\
 	fi
