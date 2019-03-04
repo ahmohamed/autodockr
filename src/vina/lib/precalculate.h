@@ -161,9 +161,12 @@ private:
 	fl m_cutoff_sqr;
 	sz n;
 	fl factor;
+	
+	triangular_matrix<precalculate_element> data;
+	
 	atom_type::t m_atom_typing_used;
 
-	triangular_matrix<precalculate_element> data;
+	
 };
 
 #endif

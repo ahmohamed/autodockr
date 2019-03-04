@@ -46,8 +46,8 @@ protected:
 		orientation_q = q;
 		orientation_m = quaternion_to_r3(orientation_q);
 	}
-	mat orientation_m;
 	qt  orientation_q;
+	mat orientation_m;
 };
 
 struct atom_range {
